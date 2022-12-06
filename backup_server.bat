@@ -29,6 +29,9 @@ set TAG="\\%SRV%\SGS_WEB\_backup\%YMD%\%APP%"
 if %1==2 (
 	set TAG="\\%SRV%\_backup\%YMD%\%APP%"
 )
+:: 排除目錄
+set EXD="%SRC:"=%\Log" "%SRC:"=%\CodeTemplates"
+echo %EXD%
 :: 取得當天日期 yyyymmdd，提供 LOG_FILE 使用
 echo Get DateTime string...
 for /f "delims=" %%a in ('powershell -Command [DateTime]::Today.ToString(\"yyyyMMdd\"^)') do @Set LOG=%%a
@@ -52,6 +55,6 @@ if %CHK%==y (
 	:: Set CodePage, Log in English
 	chcp 65001
 	:: 將主機上的專案資料夾備份到遠端指定路徑，省略正常資料夾檔案、log
-	robocopy %SRC% %TAG% /e /xo /r:1 /w:0 /tee /log+:%LOG% /nfl
+	robocopy %SRC% %TAG% /e /xo /r:1 /w:0 /tee /log+:%LOG% /nfl /xd %EXD%
 	pause
 )
