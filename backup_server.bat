@@ -1,8 +1,8 @@
 @echo off
-:: å¯æœå°‹ TODOï¼Œæ”¹ç‚ºæœ¬æ©Ÿè·¯å¾‘ï¼Œæ³¨æ„ä¸è¦æ”¹åˆ°è®Šæ•¸å°±å¥½
+:: ¥i·j´M TODO¡A§ï¬°¥»¾÷¸ô®|¡Aª`·N¤£­n§ï¨ìÅÜ¼Æ´N¦n
 echo :::: Remote Server Backup ::::
 echo.
-:: é¸æ“‡æ¸¬è©¦æ©Ÿ 001 æˆ–è€… 002ï¼Œè¼¸å…¥ 1 æˆ– 2
+:: ¿ï¾Ü´ú¸Õ¾÷ 001 ©ÎªÌ 002¡A¿é¤J 1 ©Î 2
 set SRV=TWTPEOAD00%1
 if "%SRV%"=="" (
 	echo The first argument [Server No] can't be empty.
@@ -11,32 +11,32 @@ if "%SRV%"=="" (
 	pause
 	exit
 )
-:: é€é powershell å–å¾—æ˜¨å¤©æ—¥æœŸ yyyyMMdd
+:: ³z¹L powershell ¨ú±o¬Q¤Ñ¤é´Á yyyyMMdd
 set YMD=%2
-:: å¦‚æœç©ºç™½ï¼Œé€é powershell å–å¾—æ˜¨å¤©æ—¥æœŸ yyyyMMdd
+:: ¦pªGªÅ¥Õ¡A³z¹L powershell ¨ú±o¬Q¤Ñ¤é´Á yyyyMMdd
 if "%YMD%"=="" (
 	echo Get DateTime string...
 	for /f "delims=" %%a in ('powershell -Command [DateTime]::Today.AddDays(-1^).ToString(\"yyyyMMdd\"^)') do @Set YMD=%%a
 	echo %YMD%
 	echo.
 )
-:: è¦å‚™ä»½çš„å°ˆæ¡ˆè³‡æ–™å¤¾åç¨±ï¼Œä¾‹å¦‚ SGS
+:: ­n³Æ¥÷ªº±M®×¸ê®Æ§¨¦WºÙ¡A¨Ò¦p SGS
 set APP=SGS
-:: ä¾†æºè·¯å¾‘
+:: ¨Ó·½¸ô®|
 set SRC="\\%SRV%\SGS_WEB\%APP%"
-:: ç›®æ¨™è·¯å¾‘ (å‚™ä»½åˆ°å“ªè£¡ï¼Œç›®éŒ„ä¸å­˜åœ¨æ²’é—œä¿‚)
+:: ¥Ø¼Ğ¸ô®| (³Æ¥÷¨ì­ş¸Ì¡A¥Ø¿ı¤£¦s¦b¨SÃö«Y)
 set TAG="\\%SRV%\SGS_WEB\_backup\%YMD%\%APP%"
 if %1==2 (
 	set TAG="\\%SRV%\_backup\%YMD%\%APP%"
 )
-:: å–å¾—ç•¶å¤©æ—¥æœŸ yyyymmddï¼Œæä¾› LOG_FILE ä½¿ç”¨
+:: ¨ú±o·í¤Ñ¤é´Á yyyymmdd¡A´£¨Ñ LOG_FILE ¨Ï¥Î
 echo Get DateTime string...
 for /f "delims=" %%a in ('powershell -Command [DateTime]::Today.ToString(\"yyyyMMdd\"^)') do @Set LOG=%%a
-:: LOG æª”è·¯å¾‘
+:: LOG ÀÉ¸ô®|
 set LOG_FILE=".\Logs\robo_%LOG%.log"
 echo Log to %LOG_FILE%
 
-:: ç¢ºèªåŸ·è¡Œ?
+:: ½T»{°õ¦æ?
 set CHK=%3
 if "%CHK%"=="" (
 	set CHK=y
@@ -51,7 +51,7 @@ if "%CHK%"=="" (
 if %CHK%==y (
 	:: Set CodePage, Log in English
 	chcp 65001
-	:: å°‡ä¸»æ©Ÿä¸Šçš„å°ˆæ¡ˆè³‡æ–™å¤¾å‚™ä»½åˆ°é ç«¯æŒ‡å®šè·¯å¾‘ï¼Œçœç•¥æ­£å¸¸è³‡æ–™å¤¾æª”æ¡ˆã€log
+	:: ±N¥D¾÷¤Wªº±M®×¸ê®Æ§¨³Æ¥÷¨ì»·ºİ«ü©w¸ô®|¡A¬Ù²¤¥¿±`¸ê®Æ§¨ÀÉ®×¡Blog
 	robocopy %SRC% %TAG% /e /xo /r:1 /w:0 /tee /log+:%LOG% /nfl
 	pause
 )

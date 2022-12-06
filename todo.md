@@ -4,23 +4,25 @@
 > 可用參數內的中括號 [ ] 內為選填參數，不輸入會詢問或使用預設值，不影響執行
 > 參數值如以斜線 / 隔開，表示可輸入的數值，必填參數請勿輸入例外值
 
+- [ ] 啟動終端機程式
+
 - [ ] 進入指令根目錄
 
   ```bash
   cd C:\dev\DailyUpdate
   ```
-
+### stage A *(可與B同時執行)*
 - [ ] 遠端備份 TWTPEOAD001/002 (%1=1/2, [%2=yyyymmdd, %3=y])
 
   ```bash
-  .\server_backup.bat 1
+  .\backup_server.bat 1
   ```
 
   ```bash
-  .\server_backup.bat 2
+  .\backup_server.bat 2
   ```
-
-- [ ] Close Visual Studio
+### stage B *(可與A同時執行)*
+- [ ] 關閉 Visual Studio
 
 - [ ] 執行以下指令，可逐步完成後續步驟 ([%=yyyymmdd, %2=1/2/3/4/5, %3=y])
 
@@ -45,7 +47,7 @@
 - [ ] SQL 檢查、備份與執行
 
 - [ ] 其他例外處理 (Web.config, ClientAPI)
-
+### stage C *(待AB執行完畢才可執行)*
 - [ ] 複製 [PUBLISH] to TWTPEOAD001/002，測試連線、F12、登入 (%1=1/2, [%2=yyyymmdd, %3=y])
 
   ```bash

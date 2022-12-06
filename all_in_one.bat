@@ -1,17 +1,15 @@
 @echo off
 
-:: å¯ç”¨åƒæ•¸
-:: %1 {yyyymmdd, yyyymmddB} å‚™ä»½è³‡æ–™å¤¾åç¨± 
-:: %2 åŸ·è¡ŒæŒ‡å®šæ­¥é©Ÿ(è·³åˆ°ç‰¹å®šæ­¥é©ŸåŸ·è¡Œ)
-:: %3 {y, default empty} å¦‚å¸¶å…¥ yï¼Œéƒ¨åˆ†æ­¥é©Ÿå°‡ä¸é€²è¡Œç¢ºèª
+:: °Ñ¼Æ»¡©ú
+:: %1 {yyyymmdd, yyyymmddB} ³Æ¥÷¸ê®Æ§¨¦WºÙ
+:: %2 {¼Æ¦r} ¸õ¨ì«ü©w¨BÆJ
+:: %3 {y, default empty} y=¦wÀR¼Ò¦¡¡A¹w³]µL
 
-:: å‚™ä»½è³‡æ–™å¤¾åç¨±ï¼Œé€šå¸¸æ˜¯æ˜¨å¤©æˆ–é€£å‡å‰ä¸€å¤©æ—¥æœŸ
 set BACKUP_DIR=%1
-:: è·³åˆ°ç‰¹å®šæ­¥é©ŸåŸ·è¡Œ
 set STEP=%2
-:: å®‰éœæ¨¡å¼ï¼Œå•Ÿç”¨è«‹å¸¶å…¥åƒæ•¸ yï¼Œä¾‹å¦‚ all_in_one.bat yyyymmdd y
 set SILENT_MODE=%3
-:: å¦‚æœ BACKUP_DIR ç„¡è³‡æ–™ï¼Œæ”¹å–å¾—å‰ä¸€å¤©æ—¥æœŸ yyyyMMdd
+
+:: ³Æ¥÷¸ê®Æ§¨¦WºÙ¦pªG¨S¦³´N§ì«e¤@¤Ñ yyyymmdd
 if "%BACKUP_DIR%"=="" (
 	echo The first argument [Backup Folder Name] can't be empty.
 	echo It's usually like [yyyymmdd] or [yyyymmddB].
@@ -20,32 +18,25 @@ if "%BACKUP_DIR%"=="" (
 )
 echo Backup Folder: [%BACKUP_DIR%]
 
-if "%BACKUP_DIR%"=="" (
-	echo The first argument [Backup Folder Name] can't be empty.
-	echo Please restart the process.
-	pause
-	exit
-)
-
-:: SVN åŒ¯å‡ºç›®éŒ„
+:: SVN¶×¥X¥Ø¿ı
 set SVN_EXPORT="C:\dev\_export"
-:: SVN åŒ¯å‡ºç›®éŒ„å…§çš„ [CODE] (çœŸæ­£è¦è¦†è“‹[RELEASE_CODE]çš„ç¨‹å¼)
+:: SVN¶×¥X¥Ø¿ı¤ºªº[CODE]¥Ø¿ı
 set SVN_EXPORT_CODE="%SVN_EXPORT:"=%\SOURCE\CODE"
-:: [RELEASE_CODE] å°ˆæ¡ˆç›®éŒ„
+:: [RELEASE_CODE] ¥¿¦¡±M®×
 set RELEASE_CODE_DIR="D:\LIMS20\SOURCE\RELEASE_CODE"
-:: [RELEASE_CODE] å°ˆæ¡ˆç™¼ä½ˆç›®éŒ„ (é è¨­æœƒåœ¨ä¸Šè¿°ç›®éŒ„ä¹‹ \bin å…§)
+:: [RELEASE_CODE] ¥¿¬O±M®×µo¥¬¥Ø¿ı
 set RELEASE_CODE_DEPLOY="C:\dev\_publish\RELEASE"
-:: å‚™ä»½çš„å°ˆæ¡ˆåç¨± (è³‡æ–™å¤¾åç¨±)
+:: ³Æ¥÷±M®×¦WºÙ(³q±`µ¥©ó¸ê®Æ§¨¦WºÙ)
 set BACKUP_APP=SGS
-:: [CODE] ç›®éŒ„ (æœ¬æ©Ÿé–‹ç™¼ç›®éŒ„)
+:: [CODE]¥»¾÷¶}µo¥Ø¿ı
 set CODE_DIR="C:\dev\SGS.LIMS2"
-:: è¦æ›´æ–°çš„è³‡æ–™å¤¾ (é€šå¸¸å›ºå®šäº”å€‹)
+:: ¹w³]³Æ¥÷¸ê®Æ§¨
 set BACKUP_FLD="bin,Content,Scripts,Templates,Views"
-:: LOG æª”è·¯å¾‘
+:: LOGÀÉ¸ô®|
 for /f "delims=" %%a in ('powershell -Command [DateTime]::Today.ToString(\"yyyyMMdd\"^)') do @Set YMD=%%a
 set LOG_FILE=".\Logs\robo_%YMD%.log"
 echo Log to %LOG_FILE%
-:: æ­¥é©Ÿä¹‹é–“çš„æç¤ºè¨Šæ¯
+:: ¨BÆJ¤§«e¼È°±Åã¥Ü°T®§
 set MSG=press [ENTER] when done, go to next step.
 pause
 
@@ -58,9 +49,9 @@ echo.
 :2
 call .\Batchs\2_svn_update.bat %CODE_DIR% %RELEASE_CODE_DIR% %SILENT_MODE%
 echo.
-echo :::: Check Log and Export ::::
+echo :::: Select Log and Export ::::
 echo.
-echo Use TortoiseSVN to check SVN Log, export files to [EXPORT]
+echo Open TortoiseSVN, select SVN Logs, export to [EXPORT]
 echo %MSG%
 echo.
 pause
@@ -70,7 +61,7 @@ call .\Batchs\3_copy_exports_to_release_code.bat %SVN_EXPORT_CODE% %RELEASE_CODE
 echo.
 echo :::: Check Log again ::::
 echo.
-echo Check SVN Log again, process Add/Delete/Conflict Actions
+echo Check SVN Log if any specific actions, such as Add/Delete/Conflict
 echo %MSG%
 echo.
 pause
@@ -83,22 +74,23 @@ call .\Batchs\5_copy_publish_to_daily_update.bat %BACKUP_DIR% %RELEASE_CODE_DEPL
 echo.
 echo :::: Check SQL Scripts ::::
 echo.
-echo Check [SQL], copy finished syntax, then execute in SSMS
+echo Check [SQL], copy finished script, then execute in SSMS
 echo %MSG%
 echo.
 pause
 echo.
-echo :::: Check Log and Exports ::::
+echo :::: Handling special cases ::::
 echo.
-echo Check SVN Log and [EXPORT], process exception case, such as Web.config, ClientAPI...
+echo Check SVN Log and [EXPORT] for special cases, such as Web.config, ClientAPI...
+echo All they have different update step, plz reference doc.
 echo %MSG%
 echo.
 pause
 echo.
-echo :::: Upgrade remote servers then test it ::::
+echo :::: Upgrade Server and Test ::::
 echo.
-echo Copy Backup-Folders from [PUBLISH] to remote servers, open browser then test it.
-echo execute command .\server_update_and_test.bat (server_no yyyymmdd y)
+echo Copy Backup-Folders from [PUBLISH] to remote servers, then test in browser.
+echo Execute command: .\server_update_and_test.bat (server_no yyyymmdd y)
 echo %MSG%
 echo.
 pause
@@ -113,6 +105,6 @@ echo.
 chcp 65001
 echo :::: Report in TEAMS ::::
 echo.
-echo %BACKUP_DIR% å·²æ›´æ–°
+echo %BACKUP_DIR:~0,4%.%BACKUP_DIR:~4,2%.%BACKUP_DIR:~6,2% ¤w§ó·s
 echo.
 pause
