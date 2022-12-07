@@ -102,7 +102,7 @@ echo %MSG%
 echo.
 pause
 echo.
-chcp 65001
+chcp 950
 echo :::: Report in TEAMS ::::
 echo.
 echo %BACKUP_DIR:~0,4%.%BACKUP_DIR:~4,2%.%BACKUP_DIR:~6,2% ¤w§ó·s
