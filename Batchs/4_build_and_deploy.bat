@@ -2,8 +2,8 @@
 :: 可搜尋 TODO，改為本機路徑，注意不要改到變數就好
 echo :::: Build and Publish RELEASE_CODE ::::
 echo.
-:: Load Developer Command Prompt for VS 2019
-call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\Common7\Tools\VsDevCmd.bat"
+:: Load Developer Command Prompt for VS 2022
+call "C:\Program Files\Microsoft Visual Studio\2022\Professional\Common7\Tools\VsDevCmd.bat"
 :: Path to [RELEASE_CODE]
 set DIR=%1
 :: Build and Publish

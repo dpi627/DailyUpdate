@@ -106,5 +106,6 @@ chcp 950
 echo :::: Report in TEAMS ::::
 echo.
 echo %BACKUP_DIR:~0,4%.%BACKUP_DIR:~4,2%.%BACKUP_DIR:~6,2% 已更新
+echo 測試機001/002 連線與登入正常
 echo.
 pause
