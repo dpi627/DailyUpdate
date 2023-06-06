@@ -33,6 +33,6 @@ if %CHK%==y (
 :: Set CodePage, Log in English
 chcp 65001
 :: 將主機上的專案資料夾備份到遠端指定路徑，省略正常資料夾檔案、log
-	robocopy %SRC% %TAG% /e /xo /r:1 /w:0 /tee /log+:%LOG% /nfl
+	robocopy %SRC% %TAG% /e /r:1 /w:0 /tee /log+:%LOG% /nfl
 )
 pause
