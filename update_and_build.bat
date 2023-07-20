@@ -8,29 +8,29 @@ set REL="D:\LIMS20\SOURCE\RELEASE_CODE"
 :: set Developer Command Prompt for VS 2022 path
 set CMD="C:\Program Files\Microsoft Visual Studio\2022\Professional\Common7\Tools\VsDevCmd.bat"
 :: finish message
-set MSG=Êú¨Ê©üÂ∑≤Êõ¥Êñ∞„ÄÅÁ∑®Ë≠ØÊ≠£Â∏∏
+set MSG=•ªæ˜ßÛ∑s°BΩsƒ∂•ø±`
 
-:: [2] SVN update
-:: SVN update all directories
-set ARR=%DEV%,%REL%
-for %%f in (%ARR%) do (
-    svn info %%f
-    svn update %%f
-echo.
-)
+@REM :: [2] SVN update
+@REM :: SVN update all directories
+@REM set ARR=%DEV%,%REL%
+@REM for %%f in (%ARR%) do (
+@REM     svn info %%f
+@REM     svn update %%f
+@REM echo.
+@REM )
 
-:: [3] build solution
-:: load Developer Command Prompt for VS 2022
-call %CMD%
-:: build solution
-MSBuild %DEV%\SDO.sln /p:configuration="Release"
+@REM :: [3] build solution
+@REM :: load Developer Command Prompt for VS 2022
+@REM call %CMD%
+@REM :: build solution
+@REM MSBuild %DEV%\SDO.sln /p:configuration="Release"
 
 :: [4] show message
 echo.
 echo %MSG%
-echo (Ë®äÊÅØÂ∑≤Ë§áË£Ω)
 echo.
 
 :: [5] copy message
 :: use pipline send message to clipbord
 echo %MSG% | clip
+echo message already copied
