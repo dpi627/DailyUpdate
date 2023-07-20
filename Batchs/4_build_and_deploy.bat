@@ -1,5 +1,5 @@
 @echo off
-:: ¥i·j´M TODO¡A§ï¬°¥»¾÷¸ô®|¡Aª`·N¤£­n§ï¨ìÅÜ¼Æ´N¦n
+:: å¯æœå°‹ TODOï¼Œæ”¹ç‚ºæœ¬æ©Ÿè·¯å¾‘ï¼Œæ³¨æ„ä¸è¦æ”¹åˆ°è®Šæ•¸å°±å¥½
 echo :::: Build and Publish RELEASE_CODE ::::
 echo.
 :: Load Developer Command Prompt for VS 2022
@@ -9,20 +9,20 @@ set DIR=%1
 :: Build and Publish
 MSBuild %DIR%\SDO.sln /p:platform="any cpu" /p:configuration="release" /p:DeployOnBuild=true /p:PublishProfile="FolderProfile"
 echo.
-:: ³Ì«á§ó·s®É¶¡ last-update-time
+:: æœ€å¾Œæ›´æ–°æ™‚é–“ last-update-time
 set LST=null
-:: ³z¹L powershell ¨ú±o¥Ø«e®É¶¡
+:: é€éŽ powershell å–å¾—ç›®å‰æ™‚é–“
 echo Get DateTime string...
 for /f "delims=" %%a in ('powershell -Command "Get-Date -format 'yyyy-MM-dd HH:mm:ss'"') do @set LST=%%a
 echo %LST%
 echo.
-:: TODO: [RELEASE_CODE] µo§G¸ô®|
+:: TODO: [RELEASE_CODE] ç™¼ä½ˆè·¯å¾‘
 set TAG=%2
-:: «ü©w [Scripts] ¸ê®Æ§¨
+:: æŒ‡å®š [Scripts] è³‡æ–™å¤¾
 set DIR="%TAG:"=%\Scripts"
-:: ÀË¬d¸ê®Æ§¨¬O§_¦s¦b¡A¤£¦s¦b´N·s¼W
+:: æª¢æŸ¥è³‡æ–™å¤¾æ˜¯å¦å­˜åœ¨ï¼Œä¸å­˜åœ¨å°±æ–°å¢ž
 if not exist %DIR% mkdir %DIR%
-:: ±N³Ì«á§ó·s®É¶¡¼g¤JÀÉ®×
+:: å°‡æœ€å¾Œæ›´æ–°æ™‚é–“å¯«å…¥æª”æ¡ˆ
 echo const _lims2_last_update='%LST%';> %DIR%\lastUpdate.js
 echo Save last-update-time '%LST%' to [%DIR:"=%]
 echo.

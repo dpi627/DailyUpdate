@@ -1,15 +1,15 @@
 @echo off
 
-:: °Ñ¼Æ»¡©ú
-:: %1 {yyyymmdd, yyyymmddB} ³Æ¥÷¸ê®Æ§¨¦WºÙ
-:: %2 {¼Æ¦r} ¸õ¨ì«ü©w¨BÆJ
-:: %3 {y, default empty} y=¦wÀR¼Ò¦¡¡A¹w³]µL
+:: åƒæ•¸èªªæ˜
+:: %1 {yyyymmdd, yyyymmddB} å‚™ä»½è³‡æ–™å¤¾åç¨±
+:: %2 {æ•¸å­—} è·³åˆ°æŒ‡å®šæ­¥é©Ÿ
+:: %3 {y, default empty} y=å®‰éœæ¨¡å¼ï¼Œé è¨­ç„¡
 
 set BACKUP_DIR=%1
 set STEP=%2
 set SILENT_MODE=%3
 
-:: ³Æ¥÷¸ê®Æ§¨¦WºÙ¦pªG¨S¦³´N§ì«e¤@¤Ñ yyyymmdd
+:: å‚™ä»½è³‡æ–™å¤¾åç¨±å¦‚æœæ²’æœ‰å°±æŠ“å‰ä¸€å¤© yyyymmdd
 if "%BACKUP_DIR%"=="" (
 	echo The first argument [Backup Folder Name] can't be empty.
 	echo It's usually like [yyyymmdd] or [yyyymmddB].
@@ -18,25 +18,25 @@ if "%BACKUP_DIR%"=="" (
 )
 echo Backup Folder: [%BACKUP_DIR%]
 
-:: SVN¶×¥X¥Ø¿ı
+:: SVNåŒ¯å‡ºç›®éŒ„
 set SVN_EXPORT="C:\dev\_export"
-:: SVN¶×¥X¥Ø¿ı¤ºªº[CODE]¥Ø¿ı
+:: SVNåŒ¯å‡ºç›®éŒ„å…§çš„[CODE]ç›®éŒ„
 set SVN_EXPORT_CODE="%SVN_EXPORT:"=%\SOURCE\CODE"
-:: [RELEASE_CODE] ¥¿¦¡±M®×
+:: [RELEASE_CODE] æ­£å¼å°ˆæ¡ˆ
 set RELEASE_CODE_DIR="D:\LIMS20\SOURCE\RELEASE_CODE"
-:: [RELEASE_CODE] ¥¿¬O±M®×µo¥¬¥Ø¿ı
+:: [RELEASE_CODE] æ­£æ˜¯å°ˆæ¡ˆç™¼å¸ƒç›®éŒ„
 set RELEASE_CODE_DEPLOY="C:\dev\_publish\RELEASE"
-:: ³Æ¥÷±M®×¦WºÙ(³q±`µ¥©ó¸ê®Æ§¨¦WºÙ)
+:: å‚™ä»½å°ˆæ¡ˆåç¨±(é€šå¸¸ç­‰æ–¼è³‡æ–™å¤¾åç¨±)
 set BACKUP_APP=SGS
-:: [CODE]¥»¾÷¶}µo¥Ø¿ı
+:: [CODE]æœ¬æ©Ÿé–‹ç™¼ç›®éŒ„
 set CODE_DIR="C:\dev\SGS.LIMS2"
-:: ¹w³]³Æ¥÷¸ê®Æ§¨
+:: é è¨­å‚™ä»½è³‡æ–™å¤¾
 set BACKUP_FLD="bin,Content,Scripts,Templates,Views"
-:: LOGÀÉ¸ô®|
+:: LOGæª”è·¯å¾‘
 for /f "delims=" %%a in ('powershell -Command [DateTime]::Today.ToString(\"yyyyMMdd\"^)') do @Set YMD=%%a
 set LOG_FILE=".\Logs\robo_%YMD%.log"
 echo Log to %LOG_FILE%
-:: ¨BÆJ¤§«e¼È°±Åã¥Ü°T®§
+:: æ­¥é©Ÿä¹‹å‰æš«åœé¡¯ç¤ºè¨Šæ¯
 set MSG=press [ENTER] when done, go to next step.
 pause
 
@@ -105,7 +105,7 @@ echo.
 chcp 950
 echo :::: Report in TEAMS ::::
 echo.
-echo %BACKUP_DIR:~0,4%.%BACKUP_DIR:~4,2%.%BACKUP_DIR:~6,2% ¤w§ó·s
-echo ´ú¸Õ¾÷001/002 ³s½u»Pµn¤J¥¿±`
+echo %BACKUP_DIR:~0,4%.%BACKUP_DIR:~4,2%.%BACKUP_DIR:~6,2% å·²æ›´æ–°
+echo æ¸¬è©¦æ©Ÿ001/002 é€£ç·šèˆ‡ç™»å…¥æ­£å¸¸
 echo.
 pause

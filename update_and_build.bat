@@ -8,7 +8,7 @@ set REL="D:\LIMS20\SOURCE\RELEASE_CODE"
 :: set Developer Command Prompt for VS 2022 path
 set CMD="C:\Program Files\Microsoft Visual Studio\2022\Professional\Common7\Tools\VsDevCmd.bat"
 :: finish message
-set MSG=¥»¾÷¤w§ó·s¡B½sÄ¶¥¿±`
+set MSG=æœ¬æ©Ÿå·²æ›´æ–°ã€ç·¨è­¯æ­£å¸¸
 
 :: [2] SVN update
 :: SVN update all directories
@@ -28,7 +28,7 @@ MSBuild %DEV%\SDO.sln /p:configuration="Release"
 :: [4] show message
 echo.
 echo %MSG%
-echo (°T®§¤w½Æ»s)
+echo (è¨Šæ¯å·²è¤‡è£½)
 echo.
 
 :: [5] copy message

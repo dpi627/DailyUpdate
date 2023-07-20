@@ -1,23 +1,23 @@
 @echo off
-:: ¥i·j´M TODO¡A§ï¬°¥»¾÷¸ô®|¡A¦p¸ô®|¥]§tÅÜ¼Æ %XXX% ª`·N¤£­n§ï¨ì
-:: ²M°£¤W¤@¦¸ªº¶×¥X¡Bµo§G¸ô®|¤U©Ò¦³ÀÉ®×
+:: å¯æœå°‹ TODOï¼Œæ”¹ç‚ºæœ¬æ©Ÿè·¯å¾‘ï¼Œå¦‚è·¯å¾‘åŒ…å«è®Šæ•¸ %XXX% æ³¨æ„ä¸è¦æ”¹åˆ°
+:: æ¸…é™¤ä¸Šä¸€æ¬¡çš„åŒ¯å‡ºã€ç™¼ä½ˆè·¯å¾‘ä¸‹æ‰€æœ‰æª”æ¡ˆ
 echo :::: Clear Folder (Remove Old Data) ::::
 echo.
-:: TODO: SVN ¶×¥XÀÉ®×(export)¸ô®|
+:: TODO: SVN åŒ¯å‡ºæª”æ¡ˆ(export)è·¯å¾‘
 set DEV=%1
 if "%DEV%"=="" (
 	set DEV="C:\dev\_export"
 	set /p DEV="Press ENTER to use default, or input [EXPORT] path: "
 )
-:: TODO: [RELEASE_CODE] µo§G(publis)¸ô®|
+:: TODO: [RELEASE_CODE] ç™¼ä½ˆ(publis)è·¯å¾‘
 set REL=%2
 if "%REL%"=="" (
 	set REL="C:\dev\_publish\RELEASE"
 	set /p REL="Press ENTER to use default, or input [RELEASE] path: "
 )
-:: ¤W­z¸ô®|²Õ¦X¡A¦pªG¦³·s¼W­n¦P¨B­×§ï
+:: ä¸Šè¿°è·¯å¾‘çµ„åˆï¼Œå¦‚æžœæœ‰æ–°å¢žè¦åŒæ­¥ä¿®æ”¹
 set ARR=%DEV%,%REL%
-:: ¬O§_¬°¦wÀR¼Ò¦¡(¤£¸ß°Ýª½±µ°õ¦æ)¡A±a¤J y «h¤£Åã¥Ü½T»{°T®§
+:: æ˜¯å¦ç‚ºå®‰éœæ¨¡å¼(ä¸è©¢å•ç›´æŽ¥åŸ·è¡Œ)ï¼Œå¸¶å…¥ y å‰‡ä¸é¡¯ç¤ºç¢ºèªè¨Šæ¯
 set CHK=%3
 if "%CHK%"=="" (
 	set CHK=y

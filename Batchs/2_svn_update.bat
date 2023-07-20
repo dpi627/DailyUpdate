@@ -1,5 +1,5 @@
 @echo off
-:: �i�j�M TODO�A�אּ�������|�A�`�N���n����ܼƴN�n
+:: 可搜尋 TODO，改為本機路徑，注意不要改到變數就好
 echo :::: SVN Update ::::
 echo.
 :: TODO: Path to Develop Folder or [CODE]
@@ -14,9 +14,9 @@ if "%REL%"=="" (
 	set REL="D:\LIMS20\SOURCE\RELEASE_CODE"
 	set /p REL="Press ENTER to use default, or input [RELEASE_CODE] path: "
 )
-:: �W�z���|�զX�A�p�G���s�W�n�P�B�ק�
+:: 上述路徑組合，如果有新增要同步修改
 set ARR=%DEV%,%REL%
-:: �O�_���w�R�Ҧ�(���߰ݪ�������)�A�a�J y �h����ܽT�{�T��
+:: 是否為安靜模式(不詢問直接執行)，帶入 y 則不顯示確認訊息
 set CHK=%3
 if "%CHK%"=="" (
 	set CHK=y
