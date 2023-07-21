@@ -10,20 +10,20 @@ set CMD="C:\Program Files\Microsoft Visual Studio\2022\Professional\Common7\Tool
 :: finish message
 set MSG=本機更新、編譯正常
 
-@REM :: [2] SVN update
-@REM :: SVN update all directories
-@REM set ARR=%DEV%,%REL%
-@REM for %%f in (%ARR%) do (
-@REM     svn info %%f
-@REM     svn update %%f
-@REM echo.
-@REM )
+:: [2] SVN update
+:: SVN update all directories
+set ARR=%DEV%,%REL%
+for %%f in (%ARR%) do (
+    svn info %%f
+    svn update %%f
+echo.
+)
 
-@REM :: [3] build solution
-@REM :: load Developer Command Prompt for VS 2022
-@REM call %CMD%
-@REM :: build solution
-@REM MSBuild %DEV%\SDO.sln /p:configuration="Release"
+:: [3] build solution
+:: load Developer Command Prompt for VS 2022
+call %CMD%
+:: build solution
+MSBuild %DEV%\SDO.sln /p:configuration="Release"
 
 :: [4] show message
 echo.
