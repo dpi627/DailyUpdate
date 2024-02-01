@@ -28,7 +28,7 @@ if "%CHK%"=="" (
 )
 if %CHK%==y (
 	:: Set CodePage, Log in English
-	chcp 65001
+	@REM chcp 65001
 	:: 將更新資料放到每日更新目錄 (常用五個資料夾)
 	:: 如要清除資料再備份，可將 /e 改為 /mir (等同 /e /purge)
 	for %%f in (%FLD%) do (
