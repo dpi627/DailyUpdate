@@ -5,7 +5,7 @@ chcp 65001
 :: local [development] path
 set DEV="C:\dev\SGS.LIMS2"
 :: local [release code] path
-set REL="D:\LIMS20\SOURCE\RELEASE_CODE"
+set REL="C:\dev\LIMS20\SOURCE\RELEASE_CODE"
 :: set Developer Command Prompt for VS 2022 path
 set CMD="C:\Program Files\Microsoft Visual Studio\2022\Professional\Common7\Tools\VsDevCmd.bat"
 :: finish message
