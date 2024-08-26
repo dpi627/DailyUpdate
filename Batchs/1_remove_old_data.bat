@@ -1,24 +1,20 @@
+@REM 可搜尋 TODO:，改為本機路徑，如路徑包含變數 %XXX% 注意不要改到
 @echo off
-:: 可搜尋 TODO，改為本機路徑，如路徑包含變數 %XXX% 注意不要改到
-:: 清除上一次的匯出、發佈路徑下所有檔案
-echo :::: Clear Folder (Remove Old Data) ::::
+chcp 65001
+:: 清除上次部署檔案
+echo :::: Remove Last Publish Data (清除上次部署檔案) ::::
 echo.
-:: TODO: SVN 匯出檔案(export)路徑
-set DEV=%1
-if "%DEV%"=="" (
-	set DEV="C:\dev\_export"
-	set /p DEV="Press ENTER to use default, or input [EXPORT] path: "
-)
-:: TODO: [RELEASE_CODE] 發佈(publis)路徑
-set REL=%2
+pause
+:: TODO: 專案發佈(publis)路徑
+set REL=%1
 if "%REL%"=="" (
 	set REL="C:\dev\_publish\RELEASE"
 	set /p REL="Press ENTER to use default, or input [RELEASE] path: "
 )
 :: 上述路徑組合，如果有新增要同步修改
-set ARR=%DEV%,%REL%
+set ARR=%REL%
 :: 是否為安靜模式(不詢問直接執行)，帶入 y 則不顯示確認訊息
-set CHK=%3
+set CHK=%2
 if "%CHK%"=="" (
 	set CHK=y
 	echo Remove all contents below...
