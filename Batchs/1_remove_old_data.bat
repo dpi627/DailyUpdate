@@ -1,38 +1,52 @@
-@REM 可搜尋 TODO:，改為本機路徑，如路徑包含變數 %XXX% 注意不要改到
+@REM 可搜尋 TODO: 自行修改參數(如果有)
 @echo off
-chcp 65001
-:: 清除上次部署檔案
-echo :::: Remove Last Publish Data (清除上次部署檔案) ::::
+chcp 65001 > nul
+setlocal enabledelayedexpansion
+
+@REM 參數說明
+@REM %1 {string} 專案發佈(publis)路徑 "C:\dev\_publish\RELEASE"
+@REM %2 {string} 安靜模式(執行前不再確認) y/n 預設不輸入為 n
+
+@REM 取得外部傳遞參數
+set "PUB=%~1"
+set "SILENT=%~2"
+
+@REM 函式功能說明輸出
+echo :::: Func: Remove Last Publish Data
+echo :::: Note: 清除最後一次部署檔案，避免影響本次部署內容
 echo.
-pause
-:: TODO: 專案發佈(publis)路徑
-set REL=%1
-if "%REL%"=="" (
-	set REL="C:\dev\_publish\RELEASE"
-	set /p REL="Press ENTER to use default, or input [RELEASE] path: "
+
+@REM 設定 TODO: 專案預設發佈路徑
+if "!PUB!"=="" (
+    set "PUB=C:\dev\_publish\RELEASE"
+    echo Default publis path: !PUB!
+    set /p "PUB=Press ENTER to use default, or input others: "
 )
-:: 上述路徑組合，如果有新增要同步修改
-set ARR=%REL%
-:: 是否為安靜模式(不詢問直接執行)，帶入 y 則不顯示確認訊息
-set CHK=%2
-if "%CHK%"=="" (
-	set CHK=y
-	echo Remove all contents below...
-	echo.
-	for %%f in (%ARR%) do ( echo [%%f] )
-	echo.
-	set /p CHK="Press y/n (enter to use y): "
+
+@REM 如果有多個路徑可用逗點串接
+set "ARR=!PUB!"
+
+@REM 確認路徑是否正確
+if "!SILENT!"=="" set "SILENT=n"
+if /i "!SILENT!" neq "y" (
+    echo Will remove all contents in below paths...
+    echo.
+    for %%f in (!ARR!) do ( echo [%%f] )
+    echo.
+    choice /c yn /n /m "Press y/n: "
+    if errorlevel 2 goto end
 )
-if %CHK%==y (
-	for %%f in (%ARR%) do (
-		echo Remove all contents in [%%f]....
-		if exist %%f (
-			:: remove all content in Folder and itself
-			rmdir %%f /s /q
-			:: recreate the Folder
-			mkdir %%f
-		)
-	)
+
+for %%f in (!ARR!) do (
+    echo Remove all contents in [%%f]....
+    if exist "%%f" (
+        @REM 移除資料夾中的所有內容但保留資料夾本身
+        for /d %%d in ("%%f\*") do rmdir "%%d" /s /q
+        del /q "%%f\*"
+    )
 )
+
+:end
+endlocal
 echo.
 pause
