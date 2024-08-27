@@ -1,42 +1,66 @@
 @echo off
-:: 可搜尋 TODO，改為本機路徑，注意不要改到變數就好
-echo :::: Copy Publish Files to Remote Server ::::
+@REM 可搜尋 TODO: 自行修改參數(如果有)
+chcp 65001 > nul
+setlocal enabledelayedexpansion
+
+@REM 參數說明
+@REM %1 {int} 測試機 001 或者 002，輸入 1 或 2
+@REM %2 {string} 要更新的遠端資料夾名稱 "SGS"
+@REM %3 {string} 來源路徑 "C:\dev\_publish\RELEASE"
+@REM %4 {string} 需備份資料夾(通常五個) "bin,Content,Scripts,Templates,Views"
+@REM %5 {string} LOG檔路徑 ".\Logs\robo_%YMD%.log"
+@REM %6 {string} 安靜模式(執行前不再確認) y/n
+
+@REM 取得外部傳遞參數
+set "SNO=%~1"
+set "APP=%~2"
+set "SRC=%~3"
+set "FLD=%~4"
+set "LOG=%~5"
+set "SILENT_MODE=%~6"
+
+echo %SNO% %APP% %SRC% %FLD% %LOG% %SILENT_MODE%
+echo !SNO! !APP! !SRC! !FLD! !LOG! !SILENT_MODE!
+pause
+
+@REM 設定變數
+set "SRV=TWTPEOAD00!SNO!"
+set "TAG=\\!SRV!\SGS_WEB\!APP!"
+set "URL=http://!SRV!/!APP!"
+
+@REM 功能說明
+echo :::: Update UAT Server
+echo :::: 複製發佈檔案到測試機，完成後開啟網站測試
 echo.
-:: 選擇測試機 001 或者 002，輸入 1 或 2
-set SRV=TWTPEOAD00%1
-:: 要備份的專案資料夾名稱
-set APP=%2
-:: TODO: 來源路徑 (RELASE_CODE 專案 publish 路徑)
-set SRC=%3
-:: 目標路徑 (LIMS2每日版更root路徑\yyyymmdd\程式)
-set TAG="\\%SRV%\SGS_WEB\%APP%"
-:: 備份目錄 (目錄名稱不可有空格、不用雙引號，以逗點分隔)
-set FLD=%~4
-:: TODO: LOG檔寫到哪 (注意如果路徑包含目錄，必須已經存在並且有權限讀取)
-set LOG=%5
-:: 確認執行? (預設y)
-set CHK=%6
-if "%CHK%"=="" (
-	set CHK=y
+
+@REM 確認執行
+if /i "!SILENT!" neq "y" (
 	echo Ready to Copy Files...
 	echo.
-	echo   from %SRC%
-	echo     to %TAG%
-	echo folder %FLD%
+	echo   from !SRC!
+	echo     to !TAG!
+	echo folder !FLD!
 	echo.
-	set /p CHK="Press y/n (enter to use y): "
+	choice /c yn /n /m "Press y/n: "
+    if errorlevel 2 goto end
 )
-if %CHK%==y (
-	:: Set CodePage, Log in English
-	@REM chcp 65001
-	:: 將更新資料放到每日更新目錄 (常用五個資料夾)
-	:: 如要清除資料再備份，可將 /e 改為 /mir (等同 /e /purge)
-	for %%f in (%FLD%) do (
-		robocopy %SRC%\%%f %TAG%\%%f /e /xo /r:1 /w:0 /tee /log+:%LOG% /nfl
+
+@REM 執行
+echo Copying files...
+set "FLD=!FLD:,= !"
+for %%f in (!FLD!) do (
+	robocopy "!SRC!\%%f" "!TAG!\%%f" /e /xo /r:1 /w:0 /tee /log+:"!LOG!" /nfl /mt:8
+	if errorlevel 8 (
+		echo Error occurred while copying %%f. Check the log file for details.
+	) else (
+		echo %%f copied successfully.
 	)
-	:: 開啟網站測試
-	start http://%SRV%/%APP%/
-	pause
-) else (
-	pause
 )
+
+@REM 開啟網站測試
+echo Opening website for testing...
+start "" "!URL!"
+
+:end
+endlocal
+echo.
