@@ -82,4 +82,3 @@ git branch --show-current
 :end
 endlocal
 echo.
-pause

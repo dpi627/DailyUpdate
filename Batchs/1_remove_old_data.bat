@@ -53,4 +53,3 @@ for %%f in (!ARR!) do (
 :end
 endlocal
 echo.
-pause
