@@ -1,5 +1,5 @@
 ﻿@echo off
-chcp 65001
+chcp 65001 > nul
 
 :: 參數說明
 :: %1 {yyyymmdd, yyyymmddB} 備份資料夾名稱

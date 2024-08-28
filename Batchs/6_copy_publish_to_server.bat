@@ -17,7 +17,7 @@ set "APP=%~2"
 set "SRC=%~3"
 set "FLD=%~4"
 set "LOG=%~5"
-set "SILENT_MODE=%~6"
+set "SILENT=%~6"
 
 echo %SNO% %APP% %SRC% %FLD% %LOG% %SILENT_MODE%
 echo !SNO! !APP! !SRC! !FLD! !LOG! !SILENT_MODE!
