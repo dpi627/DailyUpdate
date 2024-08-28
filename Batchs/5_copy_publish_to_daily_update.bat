@@ -26,7 +26,7 @@ if "%CHK%"=="" (
 )
 if %CHK%==y (
 :: Set CodePage, Log in English
-chcp 850
+@REM chcp 850
 :: 將更新資料放到每日更新目錄 (常用五個資料夾)
 for %%f in (%FLD%) do (
 	robocopy %SRC%\%%f %TAG%\%%f /e /xo /r:1 /w:0 /tee /log+:%LOG% /ndl /nfl

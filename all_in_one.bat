@@ -1,4 +1,5 @@
-@echo off
+﻿@echo off
+chcp 65001 > nul
 
 :: 參數說明
 :: %1 {yyyymmdd, yyyymmddB} 備份資料夾名稱
@@ -23,7 +24,7 @@ set SVN_EXPORT="C:\dev\_export"
 :: SVN匯出目錄內的[CODE]目錄
 set SVN_EXPORT_CODE="%SVN_EXPORT:"=%\SOURCE\CODE"
 :: [RELEASE_CODE] 正式專案
-set RELEASE_CODE_DIR="D:\LIMS20\SOURCE\RELEASE_CODE"
+set RELEASE_CODE_DIR="C:\dev\LIMS20\SOURCE\RELEASE_CODE"
 :: [RELEASE_CODE] 正是專案發布目錄
 set RELEASE_CODE_DEPLOY="C:\dev\_publish\RELEASE"
 :: 備份專案名稱(通常等於資料夾名稱)
@@ -102,10 +103,15 @@ echo %MSG%
 echo.
 pause
 echo.
-chcp 950
+@REM chcp 950
 echo :::: Report in TEAMS ::::
 echo.
-echo %BACKUP_DIR:~0,4%.%BACKUP_DIR:~4,2%.%BACKUP_DIR:~6,2% 已更新
-echo 測試機001/002 連線與登入正常
+@REM echo %BACKUP_DIR:~0,4%.%BACKUP_DIR:~4,2%.%BACKUP_DIR:~6,2% 已更新
+@REM echo 測試機001/002 連線與登入正常
+set MSG=%BACKUP_DIR:~0,4%.%BACKUP_DIR:~4,2%.%BACKUP_DIR:~6,2% 已更新
+set MSG=%MSG% 測試機 001/002 連線與登入正常
 echo.
+:: copy message
+:: use pipline send message to clipbord
+<nul set /p=%MSG% | clip
 pause

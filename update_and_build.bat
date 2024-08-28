@@ -1,14 +1,15 @@
-@echo off
+ï»¿@echo off
+chcp 65001
 
 :: [1] set variables
 :: local [development] path
 set DEV="C:\dev\SGS.LIMS2"
 :: local [release code] path
-set REL="D:\LIMS20\SOURCE\RELEASE_CODE"
+set REL="C:\dev\LIMS20\SOURCE\RELEASE_CODE"
 :: set Developer Command Prompt for VS 2022 path
 set CMD="C:\Program Files\Microsoft Visual Studio\2022\Professional\Common7\Tools\VsDevCmd.bat"
 :: finish message
-set MSG=¥»¾÷§ó·s¡B½sÄ¶¥¿±`
+set MSG=æœ¬æ©Ÿæ›´æ–°ã€ç·¨è­¯æ­£å¸¸
 
 :: [2] SVN update
 :: SVN update all directories
@@ -23,7 +24,8 @@ echo.
 :: load Developer Command Prompt for VS 2022
 call %CMD%
 :: build solution
-MSBuild %DEV%\SDO.sln /p:configuration="Release"
+:: output msg level => verbosity:quiet, minimal, normal, detailed, diagnostic
+MSBuild %DEV%\SDO.sln /p:configuration="Release" /verbosity:quiet
 
 :: [4] show message
 echo.
@@ -32,5 +34,4 @@ echo.
 
 :: [5] copy message
 :: use pipline send message to clipbord
-echo %MSG% | clip
-echo message already copied
+<nul set /p=%MSG% | clip

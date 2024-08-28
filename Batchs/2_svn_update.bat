@@ -28,7 +28,7 @@ if "%CHK%"=="" (
 )
 :: SVN update all folders
 if %CHK%==y (
-	chcp 950
+	::chcp 950
 	for %%f in (%ARR%) do (
 		svn info %%f
 		svn update %%f
