@@ -13,8 +13,16 @@ set "FORMAT=%~2"
 if "!DAYS!"=="" set DAYS=-1
 if "!FORMAT!"=="" set FORMAT=yyyyMMdd
 
-@REM 透過 powershell 取得日期 yyyyMMdd 字串 並設定給 RESULT 變數
+@REM 前導提示
 echo Get DateTime [!FORMAT!], shift !DAYS! days...
+echo.
+
+@REM 透過 powershell 取得日期 yyyyMMdd 字串 並設定給 RESULT 變數
 for /f "delims=" %%a in ('powershell -Command [DateTime]::Now.AddDays(!DAYS!^).ToString(\"!FORMAT!\"^)') do set RESULT=%%a
 
+@REM 完成通知
+echo [!RESULT!] saved to variable: YMD
+echo.
+
+@REM 設定全域變數
 endlocal & set "YMD=%RESULT%"
