@@ -14,14 +14,14 @@ if "!DAYS!"=="" set DAYS=-1
 if "!FORMAT!"=="" set FORMAT=yyyyMMdd
 
 @REM 前導提示
-echo Get DateTime [!FORMAT!], shift !DAYS! days...
+echo Get DateTime %BCY%!FORMAT!%R%, shift %BCY%!DAYS!%R% days...
 echo.
 
 @REM 透過 powershell 取得日期 yyyyMMdd 字串 並設定給 RESULT 變數
 for /f "delims=" %%a in ('powershell -Command [DateTime]::Now.AddDays(!DAYS!^).ToString(\"!FORMAT!\"^)') do set YMD=%%a
 
 @REM 完成通知
-echo [!YMD!] saved to variable: YMD
+echo %BGR%!YMD!%R% saved to variable: %BMG%YMD%R%
 echo.
 
 @REM 設定全域變數

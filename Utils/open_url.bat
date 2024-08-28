@@ -9,12 +9,12 @@ set "URL=%~1"
 
 @REM 檢查傳入參數
 if "!URL!"=="" (
-    echo Error: url not specified
+    echo %RD%Error:%R% url not specified
     goto end
 )
 
 @REM 前導提示
-echo Opening [!URL!]...
+echo Opening %BCY%!URL!%R%...
 echo.
 
 @REM 開啟網站
