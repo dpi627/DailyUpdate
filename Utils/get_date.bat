@@ -26,3 +26,4 @@ echo.
 
 @REM 設定全域變數
 endlocal & set "YMD=%RESULT%"
+echo.
