@@ -25,6 +25,8 @@ endlocal & set "BRANCH_NM=%BRANCH_NM%"
 
 @REM 載入設定檔
 call .\Utils\load_config.bat
+call .\Utils\load_config.bat ".\Configs\system.ini" y
+call .\Utils\load_config.bat ".\Configs\personal.ini" y
 
 @REM 設定LOG檔完整路徑
 call .\Utils\get_date.bat 0
@@ -45,6 +47,11 @@ if "%JUMP_TO_STEP%" neq "" ( goto %JUMP_TO_STEP% )
 call .\Batchs\1_remove_last_pub_data.bat %PUB% %SILENT%
 echo.
 
-exit /b
-
 :2
+call .\2_sync_repo_and_switch_br.bat %REPO% %BRANCH_UAT% "%BRANCH_PREFIX_DAILY%/%BRANCH_NM%" %SILENT%
+
+:3
+call .\3_build_and_deploy.bat "%REPO%%CODE_DIR%\%SLN_NM%" %VS_DEV_CMD%
+
+:4
+call .\4_add_timestamp.bat %PUB%

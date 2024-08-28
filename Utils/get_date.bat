@@ -2,8 +2,8 @@
 setlocal enabledelayedexpansion
 
 @REM 傳入參數說明
-@REM %1: 取得日期位移，預設 -1 (昨天)
-@REM %2: 取得日期格式，預設 yyyyMMdd
+@REM %1 {int} 取得位移天數，預設 -1 (昨天)
+@REM %2 {string} 取得日期格式字串，預設 "yyyyMMdd"
 
 @REM 設定傳入參數
 set "DAYS=%1"

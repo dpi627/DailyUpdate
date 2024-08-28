@@ -2,7 +2,7 @@
 setlocal enabledelayedexpansion
 
 @REM 參數說明
-@REM %1 {string} 測試網址 "http://twtpeoad001/SGS/"
+@REM %1 {string} 網址 "http://twtpeoad001/SGS/"
 
 @REM 設定傳入參數
 set "URL=%~1"

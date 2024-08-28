@@ -1,7 +1,8 @@
 @echo off
 
 @REM 傳入參數說明
-@REM %1: 取得日期位移，預設 -1 (昨天)
+@REM %1 {string} 設定檔名稱，預設 "config.ini"
+@REM %2 {string} 顯示詳細設定，預設無，啟用帶入 y
 
 @REM 設定傳入參數
 set "CONFIG=%~1"
