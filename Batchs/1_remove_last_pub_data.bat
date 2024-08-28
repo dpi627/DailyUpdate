@@ -25,8 +25,8 @@ if "!PUB!"=="" (
     set "PUB=C:\dev\_publish\RELEASE"
     echo Default: !PUB!
     set /p "PUB=!MSG_CFM!"
+    echo.
 )
-echo.
 
 @REM 如果有多個路徑可用逗點串接，例如 "ARR=!PUB!,!XYZ!"
 set "ARR=!PUB!"
@@ -35,7 +35,9 @@ set "ARR=!PUB!"
 if "!SILENT!"=="" set "SILENT=n"
 if /i "!SILENT!" neq "y" (
     echo Will remove all contents in below paths...
+    echo.
     for %%f in (!ARR!) do ( echo [%%f] )
+    echo.
     choice /c yn /n /m "Press y/n: "
     if errorlevel 2 goto end
 )

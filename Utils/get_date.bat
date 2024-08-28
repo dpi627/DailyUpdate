@@ -18,12 +18,11 @@ echo Get DateTime [!FORMAT!], shift !DAYS! days...
 echo.
 
 @REM 透過 powershell 取得日期 yyyyMMdd 字串 並設定給 RESULT 變數
-for /f "delims=" %%a in ('powershell -Command [DateTime]::Now.AddDays(!DAYS!^).ToString(\"!FORMAT!\"^)') do set RESULT=%%a
+for /f "delims=" %%a in ('powershell -Command [DateTime]::Now.AddDays(!DAYS!^).ToString(\"!FORMAT!\"^)') do set YMD=%%a
 
 @REM 完成通知
-echo [!RESULT!] saved to variable: YMD
+echo [!YMD!] saved to variable: YMD
 echo.
 
 @REM 設定全域變數
-endlocal & set "YMD=%RESULT%"
-echo.
+endlocal & set "YMD=%YMD%"

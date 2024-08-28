@@ -5,6 +5,7 @@
 
 @REM 設定傳入參數
 set "CONFIG=%~1"
+set "DETAIL=%~2"
 
 @REM 如果參數空白，設定預設值
 if "%CONFIG%"=="" set CONFIG=config.ini
@@ -19,10 +20,10 @@ for /f "usebackq tokens=1,* delims==" %%A in ("%CONFIG%") do (
     @REM 判斷是否為註解
     if "!line:~0,1!" neq ";" (
         set "%%A=%%B"
-        echo :: %%A=%%B
+        if "%DETAIL%"=="y" echo :: %%A=%%B
     )
 )
-echo.
+if "%DETAIL%"=="y" echo.
 
 @REM 完成通知
 echo [%CONFIG%] loaded.
