@@ -19,41 +19,41 @@ set "SILENT=%~4"
 set "MSG_CFM=Press ENTER to use default, or input others: "
 
 @REM 函式功能說明輸出
-echo :::: Update Repository
-echo :::: 更新儲存庫，切換基底分支，建立處理分支
+echo :::: %BMG%Update Repository%R%
+echo :::: %BBK%更新儲存庫，切換基底分支，建立處理分支%R%
 echo.
 
 @REM 設定 TODO: 儲存庫路徑
 if "!REPO!"=="" (
 	echo :: Set local repo path
 	set REPO="C:\dev\LIMS20\"
-	echo Default: !REPO!
+	echo Default: %BGR%!REPO!%R%
 	set /p "REPO=!MSG_CFM!"
+	echo.
 )
-echo.
 
 @REM 設定 TODO: 基底分支
 if "!BR_BASE!"=="" (
 	echo :: Set base branch
 	set "BR_BASE=uat"
-	echo Default: !BR_BASE!
+	echo Default: %BGR%!BR_BASE!%R%
 	set /p "BR_BASE=!MSG_CFM!"
+	echo.
 )
-echo.
 
 @REM 設定 TODO: 處理分支名稱
 if "!BR_PROC!"=="" (
 	echo :: Set process branch
 	set "BR_PROC=u/yyyymmdd"
-	echo Default: !BR_PROC!
+	echo Default: %BGR%!BR_PROC!%R%
 	set /p "BR_PROC=!MSG_CFM!"
+	echo.
 )
-echo.
 
 @REM 確認執行
 if "!SILENT!"=="" set "SILENT=n"
 if /i "!SILENT!" neq "y" (
-    echo Will pull branch [!BR_BASE!] in !REPO! and create branch [!BR_PROC!]...
+    echo Will pull branch %BGR%!BR_BASE!%R% in %BGR%!REPO!%R% and create branch %BGR%!BR_PROC!%R%...
     choice /c yn /n /m "Press y/n: "
     if errorlevel 2 goto end
 )
@@ -80,5 +80,6 @@ echo "Current branch:"
 git branch --show-current
 
 :end
-endlocal
+set "EXIT_CODE=%errorlevel%"
+endlocal & exit /b %EXIT_CODE%
 echo.

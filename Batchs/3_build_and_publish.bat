@@ -11,17 +11,17 @@ set "DEV=%~2"
 
 @REM 檢查傳入參數
 if "!SLN!"=="" (
-    echo Error: Solution path not specified
+    echo %BRD%Error:%R% Solution path not specified
     goto end
 )
 if "!DEV!"=="" (
-    echo Error: Developer Command Prompt not specified
+    echo %BRD%Error:%R% Developer Command Prompt not specified
     goto end
 )
 
 @REM 功能說明
-echo :::: Build and Publish
-echo :::: 編譯並發佈專案，並寫入最後更新時間
+echo :::: %BMG%Build and Publish%R%
+echo :::: %BBK%編譯並發佈專案，並寫入最後更新時間%R%
 echo.
 
 @REM 執行 Visual Studio Developer Command Prompt

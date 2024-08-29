@@ -17,17 +17,17 @@ set "LOG=%~4"
 set "SILENT=%~5"
 
 @REM 功能說明
-echo :::: Update UAT Server
-echo :::: 複製發佈檔案到測試機進行更新
+echo :::: %BMG%Update UAT Server%R%
+echo :::: %BBK%複製發佈檔案到測試機進行更新%R%
 echo.
 
 @REM 確認執行
 if /i "!SILENT!" neq "y" (
 	echo Ready to Copy Files...
 	echo.
-	echo   from !SRC!
-	echo     to !TAG!
-	echo folder !FLD!
+	echo   from %BL%!SRC!%R%
+	echo     to %BL%!TAG!%R%
+	echo folder %BL%!FLD!%R%
 	echo.
 	choice /c yn /n /m "Press y/n: "
     if errorlevel 2 goto end
@@ -39,12 +39,13 @@ set "FLD=!FLD:,= !"
 for %%f in (!FLD!) do (
 	robocopy "!SRC!\%%f" "!TAG!\%%f" /e /xo /r:1 /w:0 /tee /log+:"!LOG!" /nfl /mt:8
 	if errorlevel 8 (
-		echo Error occurred while copying %%f. Check the log file for details.
+		echo %BRD%Error:%R% occurred while copying %BGR%%%f%R%. Check the log file for details.
 	) else (
-		echo %%f copied successfully.
+		echo %BGR%%%f%R% copied successfully.
 	)
 )
 
 :end
-endlocal
+set "EXIT_CODE=%errorlevel%"
+endlocal & exit /b %EXIT_CODE%
 echo.

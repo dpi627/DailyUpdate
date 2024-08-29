@@ -15,8 +15,8 @@ set "SILENT=%~2"
 set "MSG_CFM=Press ENTER to use default, or input others: "
 
 @REM 功能說明
-echo :::: Remove Last Publish Data
-echo :::: 清除最後一次部署檔案，避免影響本次部署內容
+echo :::: %BMG%Remove Last Publish Data%R%
+echo :::: %BBK%清除最後一次部署檔案，避免影響本次部署內容%R%
 echo.
 
 @REM 設定 TODO: 專案預設發佈路徑
@@ -36,7 +36,7 @@ if "!SILENT!"=="" set "SILENT=n"
 if /i "!SILENT!" neq "y" (
     echo Will remove all contents in below paths...
     echo.
-    for %%f in (!ARR!) do ( echo [%%f] )
+    for %%f in (!ARR!) do ( echo [%BGR%%%f%R%] )
     echo.
     choice /c yn /n /m "Press y/n: "
     if errorlevel 2 goto end
@@ -44,7 +44,7 @@ if /i "!SILENT!" neq "y" (
 
 @REM 執行
 for %%f in (!ARR!) do (
-    echo Remove all contents in [%%f]....
+    echo Remove all contents in [%BGR%%%f%R%]....
     if exist "%%f" (
         @REM 移除資料夾中的所有內容但保留資料夾本身
         for /d %%d in ("%%f\*") do rmdir "%%d" /s /q
@@ -53,5 +53,6 @@ for %%f in (!ARR!) do (
 )
 
 :end
-endlocal
+set "EXIT_CODE=%errorlevel%"
+endlocal & exit /b %EXIT_CODE%
 echo.

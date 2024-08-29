@@ -20,12 +20,12 @@ set "SILENT=%3"
 @REM 更新分支名稱如果沒有帶入，就使用前一天 yyyymmdd
 setlocal enabledelayedexpansion
 if "%BRANCH_NM%"=="" (
-	call .\Utils\get_date.bat -1 %BRANCH_NM_FORMAT%
+	call .\Utils\get_date.bat 1 %BRANCH_NM_FORMAT%
 	set "BRANCH_NM=!YMD!"
 )
 @REM 設定處理分支名稱
 endlocal & set "BRANCH_NM=%BRANCH_NM%"
-set "BRANCH_PROC=%BRANCH_PREFIX_DAILY%/%BRANCH_NM%"
+set "BRANCH_PROC=%BRANCH_PREFIX_WEEKLY%/%BRANCH_NM%"
 
 @REM 設定本次LOG檔完整路徑
 call .\Utils\get_date.bat 0
@@ -59,7 +59,7 @@ if %errorlevel% equ 2 goto end
 :2
 @REM 更新儲存庫指定分支並建立更新分支
 call .\Utils\logger.bat "Update Repository and Create Branch [%BRANCH_PROC%]"
-call .\Batchs\2_sync_repo_and_switch_br.bat %REPO% %BRANCH_UAT% %BRANCH_PROC% %SILENT%
+call .\Batchs\2_sync_repo_and_switch_br.bat %REPO% %BRANCH_DEF% %BRANCH_PROC% %SILENT%
 if %errorlevel% equ 2 goto end
 
 :3

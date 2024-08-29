@@ -11,7 +11,7 @@ set "PUB=%~1"
 
 @REM 檢查傳入參數
 if "!PUB!"=="" (
-    echo Error: Publish path not specified
+    echo %BRD%Error:%R% Publish path not specified
     goto end
 )
 
@@ -20,8 +20,8 @@ set "SCRIPTS_DIR=!PUB!\Scripts"
 set "UPD_FILE=!SCRIPTS_DIR!\lastUpdate.js"
 
 @REM 功能說明
-echo :::: Add Timestamp
-echo :::: 寫入最後更新時間戳記
+echo :::: %BMG%Add Timestamp%R%
+echo :::: %BBK%寫入最後更新時間戳記%R%
 echo.
 
 @REM 透過 powershell 取得目前時間
@@ -32,7 +32,7 @@ call ..\Utils\get_date.bat 0 "yyyy-MM-dd HH:mm:ss"
 if not exist "!SCRIPTS_DIR!" mkdir "!SCRIPTS_DIR!"
 @REM 將最後更新時間寫入檔案
 echo const _lims2_last_update='%YMD%';> "!UPD_FILE!"
-echo Save last-update-time '%YMD%' to [!SCRIPTS_DIR!]
+echo Save last-update-time %BGR%'%YMD%'%R% to %BGR%!SCRIPTS_DIR!%R%
 
 :end
 endlocal
