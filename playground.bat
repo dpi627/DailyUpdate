@@ -1,12 +1,12 @@
 @echo off
 chcp 65001 > nul
 
-call .\Utils\colors.bat y
+@REM 載入設定
+call .\global_usings.bat
 
-@REM 讀取 config.ini 設定檔
-call .\Utils\load_config.bat ".\Configs\system.ini"
-call .\Utils\load_config.bat ".\Configs\personal.ini" y
-call .\Utils\load_config.bat ".\Configs\message.ini" y
+call .\Utils\chk_proc.bat %VS_EXE% "%MSG_VS_RUNNING%"
+
+exit /b
 
 @REM call .\Utils\get_date.bat -1 "yyyy.MM.dd" y
 
