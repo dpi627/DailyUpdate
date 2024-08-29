@@ -7,7 +7,7 @@ setlocal enabledelayedexpansion
 @REM %3 {string} 安靜模式(不輸出訊息)
 
 @REM 設定傳入參數
-set "DAYS=%1"
+set "DAYS=%~1"
 set "FORMAT=%~2"
 set "SILENT=%~3"
 

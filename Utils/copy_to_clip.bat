@@ -5,7 +5,7 @@ setlocal enabledelayedexpansion
 @REM %1 {string} 訊息字串
 
 @REM 設定傳入參數
-set "MSG=%1"
+set "MSG=%~1"
 
 @REM 設定變數並複製到剪貼簿
 if "!MSG!" neq "" (

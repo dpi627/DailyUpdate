@@ -25,8 +25,9 @@ set "R=%E%[0m"
 setlocal enabledelayedexpansion
 @REM 取得輸入參數，判斷是否顯示範例
 set "SHOW_SAMPLE=%~1"
-if "!SHOW_SAMPLE!" equ "y" (
+if "!SHOW_SAMPLE!"=="y" (
     @REM 輸出每種顏色的範例
     echo %BK%BK %RD%RD %GR%GR %YL%YL %BL%BL %MG%MG %CY%CY %WH%WH %BBK%BBK %BRD%BRD %BGR%BGR %BYL%BYL %BBL%BBL %BMG%BMG %BCY%BCY %BWH%BWH%R%
+    echo.
 )
 endlocal

@@ -1,11 +1,7 @@
 @echo off
 chcp 65001 > nul
-@REM 載入顏色設定
-call .\Utils\colors.bat
-@REM 載入設定檔
-call .\Utils\load_config.bat ".\Configs\system.ini"
-call .\Utils\load_config.bat ".\Configs\message.ini"
-call .\Utils\load_config.bat ".\Configs\personal.ini" y
+@REM 載入設定
+call .\global_usings.bat
 
 @REM 外部參數說明
 @REM %1 {string} 更新分支名稱，通常使用日期 yyyymmdd, yyyymmddB
@@ -23,7 +19,7 @@ if "%BRANCH_NM%"=="" (
 	call .\Utils\get_date.bat -1 %BRANCH_NM_FORMAT%
 	set "BRANCH_NM=!YMD!"
 )
-@REM 設定處理分支名稱
+@REM 設定處理分支，例如 u/20220808
 endlocal & set "BRANCH_NM=%BRANCH_NM%"
 set "BRANCH_PROC=%BRANCH_PREFIX_DAILY%/%BRANCH_NM%"
 
@@ -31,19 +27,19 @@ set "BRANCH_PROC=%BRANCH_PREFIX_DAILY%/%BRANCH_NM%"
 call .\Utils\get_date.bat 0
 set "LOG_FILE=%LOG_DIR%\%LOG_PREFIX%_%YMD%.%LOG_SUFFIX%"
 
-@REM 最後確認
+@REM 執行前最後確認
 echo.
 echo %BMG%Final Confirm:%R%
 echo %BBK%========================================================%R%
 echo %BCY%1.%R% Make sure %BRD%SAVE%R% all editing files
 echo %BCY%2.%R% %BRD%Commit%R% all changes (or Stash)
-echo %BCY%3.%R% %BBK%[Optional]%R% Close VS2022 would a plus
+echo %BCY%3.%R% %BBK%[Optional]%R% Close Visual Studio would be better
 echo %BCY%4.%R% Update Branch: %BGR%%BRANCH_PROC%%R%
 echo %BCY%5.%R% Log file path: %BGR%%LOG_FILE%%R%
 echo %BBK%========================================================%R%
 echo.
 
-@REM 步驟開始之前暫停顯示訊息
+@REM 暫停並顯示訊息確認進度
 echo %BYL%%MSG_STEP%%R%
 pause
 
@@ -51,10 +47,15 @@ pause
 if "%JUMP_TO_STEP%" neq "" ( goto %JUMP_TO_STEP% )
 
 :1
-@REM 移除最後一次部署檔案
+@REM 刪除最後一次部署檔案
 call .\Utils\logger.bat "Remove Last Publish Data"
 call .\Batchs\1_remove_last_pub_data.bat %PUB% %SILENT%
 if %errorlevel% equ 2 goto end
+
+@REM 暫停並顯示訊息確認進度
+echo %BYL%%MSG_STEP%%R%
+call .\Utils\chk_proc.bat %VS_EXE% "%MSG_VS_RUNNING%"
+pause
 
 :2
 @REM 更新儲存庫指定分支並建立更新分支
@@ -62,16 +63,28 @@ call .\Utils\logger.bat "Update Repository and Create Branch [%BRANCH_PROC%]"
 call .\Batchs\2_sync_repo_and_switch_br.bat %REPO% %BRANCH_UAT% %BRANCH_PROC% %SILENT%
 if %errorlevel% equ 2 goto end
 
+@REM 暫停並顯示訊息確認進度
+echo %BYL%%MSG_STEP%%R%
+pause
+
 :3
 @REM 編譯並部署
 call .\Utils\logger.bat "Build and Publish [%SLN_NM%]"
 call .\Batchs\3_build_and_publish.bat "%REPO%%CODE_DIR%\%SLN_NM%" "%VS_DEV_CMD%"
 if %errorlevel% equ 2 goto end
 
+@REM 暫停並顯示訊息確認進度
+echo %BYL%%MSG_STEP%%R%
+pause
+
 :4
 @REM (Optional)加入時間戳記
 call .\Utils\logger.bat "Add Timestamp"
 call .\Batchs\4_add_timestamp.bat %PUB%
+
+@REM TODO: 更新測試機 1, 2
+
+@REM TODO: 開啟瀏覽器測試 1, 2
 
 :end
 if %errorlevel% equ 2 (

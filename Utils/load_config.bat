@@ -13,7 +13,7 @@ if "%CONFIG%"=="" set CONFIG=config.ini
 
 @REM 前導提示
 echo Loading settings from %BCY%%CONFIG%%R%...
-echo.
+@REM echo.
 
 @REM 讀取 config.ini 設定檔，設定所有全域變數
 for /f "usebackq tokens=1,* delims==" %%A in ("%CONFIG%") do (
@@ -24,7 +24,7 @@ for /f "usebackq tokens=1,* delims==" %%A in ("%CONFIG%") do (
         if "%DETAIL%"=="y" echo %BMG%%%A%BBK%=%R%%%B
     )
 )
-if "%DETAIL%"=="y" echo.
+@REM if "%DETAIL%"=="y" echo.
 
 @REM 完成通知
 echo %BGR%%CONFIG%%R% loaded.
