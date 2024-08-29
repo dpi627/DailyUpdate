@@ -1,5 +1,4 @@
 @echo off
-chcp 65001 > nul
 
 @REM 設定 ESC 字符
 set "E="

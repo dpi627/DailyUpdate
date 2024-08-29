@@ -1,11 +1,10 @@
 @echo off
-chcp 65001 > nul
 setlocal enabledelayedexpansion
 
 @REM 檢查 curl 是否安裝，未安裝退出
 where curl >nul 2>nul
 if %errorlevel% neq 0 (
-    echo %BYL%Warning:%R% curl is not installed. Skip this script.
+    echo %BYL%Warning:%R% curl is not installed.
     exit /b 1
 )
 

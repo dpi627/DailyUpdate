@@ -1,5 +1,4 @@
 @echo off
-chcp 65001 > nul
 
 @REM 傳入參數說明
 @REM %1 {string} 設定檔名稱，預設 "config.ini"
