@@ -6,6 +6,10 @@ call .\Utils\colors.bat
 @REM 取得日期字串存入變數 YMD
 @REM call .\Functions\get_date.bat 1 "yyyy-MM-dd-HHmmss"
 
+call .\Utils\log_seq.bat
+
+exit /b 0
+
 call .\Utils\get_date.bat
 
 @REM 讀取 config.ini 設定檔
