@@ -11,7 +11,7 @@ call .\global_usings.bat
 @REM 取得外部傳遞參數
 set "BRANCH_NM=%~1"
 set "JUMP_TO_STEP=%~2"
-set "SILENT=%3"
+set "SILENT=%~3"
 
 @REM 更新分支名稱如果沒有帶入，就使用明天 yyyymmdd
 setlocal enabledelayedexpansion
