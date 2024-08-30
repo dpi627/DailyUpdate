@@ -29,7 +29,7 @@ call .\Utils\get_date.bat 0
 set "LOG_FILE=%LOG_DIR%\%LOG_PREFIX%_%YMD%.%LOG_SUFFIX%"
 
 @REM 複製專案發佈目錄內的常用更新目錄，貼到測試機進行更新
-call .\Batchs\5_update_uat.bat %PUB% %TAG% "%COPY_DIRS%" %LOG_FILE% %SILENT%
+call .\Batches\5_update_uat.bat %PUB% %TAG% "%COPY_DIRS%" %LOG_FILE% %SILENT%
 
 @REM 更新完成後，開啟瀏覽器進行測試
 call .\Utils\open_url.bat %URL%

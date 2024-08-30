@@ -52,7 +52,7 @@ if "%JUMP_TO_STEP%" neq "" ( goto %JUMP_TO_STEP% )
 :1
 @REM 刪除最後一次部署檔案
 call .\Utils\logger.bat "Remove Last Publish Data"
-call .\Batchs\1_remove_last_pub_data.bat %PUB% %SILENT%
+call .\Batches\1_remove_last_pub_data.bat %PUB% %SILENT%
 if %errorlevel% equ 2 goto end
 
 @REM 檢查 Visual Studio 是否正在執行
@@ -64,7 +64,7 @@ if errorlevel 2 goto end
 :2
 @REM 更新儲存庫指定分支並建立更新分支
 call .\Utils\logger.bat "Update Repository and Create Branch [%BRANCH_PROC%]"
-call .\Batchs\2_sync_repo_and_switch_br.bat %REPO% %BRANCH_UAT% %BRANCH_PROC% %SILENT%
+call .\Batches\2_sync_repo_and_switch_br.bat %REPO% %BRANCH_UAT% %BRANCH_PROC% %SILENT%
 if %errorlevel% equ 2 goto end
 
 @REM 暫停確認繼續執行或中斷
@@ -74,7 +74,7 @@ if errorlevel 2 goto end
 :3
 @REM 編譯並部署
 call .\Utils\logger.bat "Build and Publish [%SLN_NM%]"
-call .\Batchs\3_build_and_publish.bat "%REPO%%CODE_DIR%\%SLN_NM%" "%VS_DEV_CMD%"
+call .\Batches\3_build_and_publish.bat "%REPO%%CODE_DIR%\%SLN_NM%" "%VS_DEV_CMD%"
 if %errorlevel% equ 2 goto end
 
 @REM 暫停確認繼續執行或中斷
@@ -84,7 +84,7 @@ if errorlevel 2 goto end
 :4
 @REM (Optional)加入時間戳記
 call .\Utils\logger.bat "Add Timestamp"
-call .\Batchs\4_add_timestamp.bat %PUB%
+call .\Batches\4_add_timestamp.bat %PUB%
 
 @REM 暫停確認繼續執行或中斷
 call .\Utils\chk_step.bat %SILENT% "%MSG_STEP%"
@@ -93,7 +93,7 @@ if errorlevel 2 goto end
 :5
 @REM 更新測試機 1
 call .\Utils\logger.bat "Update UAT Server [%UAT01_PATH%]"
-call .\Batchs\5_update_uat.bat %PUB% %UAT01_PATH% "%COPY_DIRS%" %LOG_FILE% %SILENT%
+call .\Batches\5_update_uat.bat %PUB% %UAT01_PATH% "%COPY_DIRS%" %LOG_FILE% %SILENT%
 
 @REM 暫停確認繼續執行或中斷
 call .\Utils\chk_step.bat %SILENT% "%MSG_STEP%"
@@ -102,7 +102,7 @@ if errorlevel 2 goto end
 :6
 @REM 更新測試機 2
 call .\Utils\logger.bat "Update UAT Server [%UAT02_PATH%]"
-call .\Batchs\5_update_uat.bat %PUB% %UAT02_PATH% "%COPY_DIRS%" %LOG_FILE% %SILENT%
+call .\Batches\5_update_uat.bat %PUB% %UAT02_PATH% "%COPY_DIRS%" %LOG_FILE% %SILENT%
 
 @REM 暫停確認繼續執行或中斷
 call .\Utils\chk_step.bat %SILENT% "%MSG_STEP%"
