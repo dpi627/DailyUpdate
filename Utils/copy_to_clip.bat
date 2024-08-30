@@ -14,6 +14,5 @@ if "!MSG!" neq "" (
     echo.
 )
 
-exit /b
-
 endlocal
+exit /b

@@ -18,6 +18,5 @@ call %~dp0get_date.bat 0 "yyyy-MM-ddTHH:mm:ss.fffZ"
 call %~dp0log_file.bat "%YMD%" "%LogMessage%" "%LogLevel%" "%LogFile%"
 call %~dp0log_seq.bat "%YMD%" "%LogMessage%" "%LogLevel%" "%LogFile%"
 
-exit /b
-
 endlocal
+exit /b

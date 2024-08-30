@@ -24,6 +24,5 @@ if "%Timestamp%"=="" (
 :: 寫入日誌
 echo [%Timestamp%] [%LogLevel%] %LogMessage% >> "%LogFile%"
 
-exit /b
-
 endlocal
+exit /b
