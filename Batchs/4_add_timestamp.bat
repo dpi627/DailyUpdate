@@ -21,18 +21,18 @@ set "UPD_FILE=!SCRIPTS_DIR!\lastUpdate.js"
 
 @REM 功能說明
 echo :::: %BMG%Add Timestamp%R%
-echo :::: %BBK%寫入最後更新時間戳記%R%
+echo :::: %BBK%(非必要) 寫入最後更新時間戳記方便追蹤%R%
 echo.
 
 @REM 透過 powershell 取得目前時間
 @REM for /f "delims=" %%a in ('powershell -Command "Get-Date -format 'yyyy-MM-dd HH:mm:ss'"') do @set UPD=%%a
-call ..\Utils\get_date.bat 0 "yyyy-MM-dd HH:mm:ss"
+call .\Utils\get_date.bat 0 "yyyy-MM-dd HH:mm:ss"
 @REM echo Get datetime: %YMD%
 @REM 設定 [Scripts] 資料夾
 if not exist "!SCRIPTS_DIR!" mkdir "!SCRIPTS_DIR!"
 @REM 將最後更新時間寫入檔案
 echo const _lims2_last_update='%YMD%';> "!UPD_FILE!"
-echo Save last-update-time %BGR%'%YMD%'%R% to %BGR%!SCRIPTS_DIR!%R%
+echo Save last-update-time %BGR%'%YMD%'%R% to %BGR%!UPD_FILE!%R%
 
 :end
 endlocal

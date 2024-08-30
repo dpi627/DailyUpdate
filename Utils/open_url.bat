@@ -15,7 +15,6 @@ if "!URL!"=="" (
 
 @REM 前導提示
 echo Opening %BCY%!URL!%R%...
-echo.
 
 @REM 開啟網站
 start "" "!URL!"

@@ -17,17 +17,17 @@ set "LOG=%~4"
 set "SILENT=%~5"
 
 @REM 功能說明
-echo :::: %BMG%Update UAT Server%R%
-echo :::: %BBK%複製發佈檔案到測試機進行更新%R%
+echo :::: %BMG%Update Server%R%
+echo :::: %BBK%複製發佈檔案到主機進行更新%R%
 echo.
 
 @REM 確認執行
 if /i "!SILENT!" neq "y" (
 	echo Ready to Copy Files...
 	echo.
-	echo   from %BL%!SRC!%R%
-	echo     to %BL%!TAG!%R%
-	echo folder %BL%!FLD!%R%
+	echo   from "%BCY%!SRC!%R%"
+	echo     to "%BCY%!TAG!%R%"
+	echo folder "%BCY%!FLD!%R%"
 	echo.
 	choice /c yn /n /m "Press y/n: "
     if errorlevel 2 goto end
@@ -46,6 +46,6 @@ for %%f in (!FLD!) do (
 )
 
 :end
+echo.
 set "EXIT_CODE=%errorlevel%"
 endlocal & exit /b %EXIT_CODE%
-echo.

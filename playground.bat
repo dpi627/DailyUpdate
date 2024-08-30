@@ -4,6 +4,12 @@ chcp 65001 > nul
 @REM 載入設定
 call .\global_usings.bat
 
+
+call .\Utils\get_date.bat 1 %WEEKLY_DIR_FORMAT%
+set "TAG=%WEEKLY_PATH%\%WEEKLY_DIR_CODE%\%YMD%"
+echo "%TAG%"
+@REM call .\Batchs\5_update_uat.bat %PUB% "%TAG%" "%COPY_DIRS%" %LOG_FILE% %SILENT%
+
 call .\Utils\chk_proc.bat %VS_EXE% "%MSG_VS_RUNNING%"
 
 exit /b

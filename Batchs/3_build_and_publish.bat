@@ -21,7 +21,7 @@ if "!DEV!"=="" (
 
 @REM 功能說明
 echo :::: %BMG%Build and Publish%R%
-echo :::: %BBK%編譯並發佈專案，並寫入最後更新時間%R%
+echo :::: %BBK%編譯專案並進行發佈，檔案會寫入專案發行路徑%R%
 echo.
 
 @REM 執行 Visual Studio Developer Command Prompt
@@ -31,6 +31,7 @@ call "!DEV!"
 MSBuild "!SLN!" /p:platform="any cpu" /p:configuration="release" /p:DeployOnBuild=true /p:PublishProfile="FolderProfile" /verbosity:minimal
 if !errorlevel! neq 0 goto end
 echo.
+echo %BGR%Build and Publish successfully%R%
 
 :end
 endlocal

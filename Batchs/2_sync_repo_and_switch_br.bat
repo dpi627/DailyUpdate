@@ -54,32 +54,37 @@ if "!BR_PROC!"=="" (
 if "!SILENT!"=="" set "SILENT=n"
 if /i "!SILENT!" neq "y" (
     echo Will pull branch %BGR%!BR_BASE!%R% in %BGR%!REPO!%R% and create branch %BGR%!BR_PROC!%R%...
-    choice /c yn /n /m "Press y/n: "
+    echo.
+	choice /c yn /n /m "Press y/n: "
     if errorlevel 2 goto end
 )
 
 @REM 執行
 @REM 進入儲存庫目錄
 cd !REPO!
-echo Into [%cd%]
+echo Into [%BGR%%cd%%R%]
 echo.
 @REM 切換至基底分支
+echo Switch to branch: %BGR%!BR_BASE!%R%
 git switch !BR_BASE!
-echo "Current branch:"
-git branch --show-current
+for /f "delims=" %%i in ('git branch --show-current') do set curr_br=%%i
+echo Current branch: %BGR%%curr_br%%R%
 echo.
 @REM 拉取最新版本
+echo Pull branch: %BGR%!BR_BASE!%R%
 git pull origin !BR_BASE!
 echo.
 @REM 拉取兩次，因為第一次可能驗證失敗
+echo Pull branch: %BGR%!BR_BASE!%R% %BBK%(again)%R%
 git pull origin !BR_BASE!
 echo.
 @REM 建立處理分支並切換
-git checkout -b !BR_PROC!
-echo "Current branch:"
-git branch --show-current
+echo Create and switch to branch: %BGR%!BR_PROC!%R%
+git switch -c !BR_PROC!
+for /f "delims=" %%i in ('git branch --show-current') do set curr_br=%%i
+echo Current branch: %BGR%%curr_br%%R%
 
 :end
+echo.
 set "EXIT_CODE=%errorlevel%"
 endlocal & exit /b %EXIT_CODE%
-echo.
