@@ -38,7 +38,7 @@ if /i "!SILENT!" neq "y" (
     echo.
     for %%f in (!ARR!) do ( echo [%BGR%%%f%R%] )
     echo.
-    choice /c yn /n /m "Press y/n: "
+    choice /c yn /n /m %BYL%"%MSG_STEP%"%R%
     if errorlevel 2 goto end
 )
 

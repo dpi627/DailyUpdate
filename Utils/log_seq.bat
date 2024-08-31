@@ -59,6 +59,10 @@ curl -s -o nul -X POST "%SEQ_URL%api/events/raw" ^
      -d "%JSON%"
 echo.
 
-if %errorlevel% neq 0 echo %BRD%Error:%R% Failed to send log to Seq
+if %errorlevel% neq 0 (
+    echo %BRD%Error:%R% Failed to send log to Seq
+    echo.
+)
 
 endlocal
+goto :eof

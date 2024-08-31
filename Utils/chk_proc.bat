@@ -14,10 +14,14 @@ if "!EXE!"=="" (
 @REM 檢查程序是否正在執行
 tasklist /FI "IMAGENAME eq !EXE!" | find /I "!EXE!" >nul
 if !ERRORLEVEL! equ 0 (
-    @REM 如果找到顯示提示視窗
-    powershell -NoProfile -Command "Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('!MSG!')"
+    echo %BYL%Warning:%R% [%BCY%!EXE!%R%] is running
+    @REM 顯示提示視窗
+    powershell -NoProfile -Command "Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('!MSG!')" > nul
+) else (
+    echo %BGR%Info:%R% [%BCY%!EXE!%R%] is not running
 )
 
 :end
 endlocal
+echo.
 exit /b

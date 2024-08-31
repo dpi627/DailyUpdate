@@ -27,12 +27,13 @@ echo.
 @REM 執行 Visual Studio Developer Command Prompt
 call "!DEV!"
 
-@REM 編譯並發佈專案
+@REM 編譯並發佈專案 TODO: 編譯錯誤狀況可測試看看
 MSBuild "!SLN!" /p:platform="any cpu" /p:configuration="release" /p:DeployOnBuild=true /p:PublishProfile="FolderProfile" /verbosity:minimal
 if !errorlevel! neq 0 goto end
 echo.
 echo %BGR%Build and Publish successfully%R%
 
 :end
-endlocal
+set "EXIT_CODE=!errorlevel!"
+endlocal & exit /b %EXIT_CODE%
 echo.

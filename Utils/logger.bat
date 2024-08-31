@@ -21,4 +21,4 @@ call %~dp0log_file.bat "%YMD%" "%LogMessage%" "%LogLevel%" "%LogFile%"
 call %~dp0log_seq.bat "%YMD%" "%LogMessage%" "%LogLevel%"
 
 endlocal
-exit /b
+goto :eof

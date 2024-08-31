@@ -4,15 +4,33 @@ chcp 65001 > nul
 @REM 載入設定
 call .\global_usings.bat
 
-
-call .\Utils\get_date.bat 1 %WEEKLY_DIR_FORMAT%
-set "TAG=%WEEKLY_PATH%\%WEEKLY_DIR_CODE%\%YMD%"
-echo "%TAG%"
+@REM call :GetDate 1 %WEEKLY_DIR_FORMAT%
+@REM set "TAG=%WEEKLY_PATH%\%WEEKLY_DIR_CODE%\%YMD%"
+@REM echo %YMD%
 @REM call .\Batches\5_update_uat.bat %PUB% "%TAG%" "%COPY_DIRS%" %LOG_FILE% %SILENT%
 
-call .\Utils\chk_proc.bat %VS_EXE% "%MSG_VS_RUNNING%"
+@REM call :ChkProc %VS_EXE% "%MSG_VS_RUNNING%"
 
-exit /b
+call :chkStep "%MSG_STEP%" %SILENT%
+
+echo "After call chkStep"
+
+:end
+echo "After end"
+goto :eof
+exit
+
+
+:getDate
+rem 在這裡放置 get_date.bat 的內容，或者調用原文件
+    call .\Utils\get_date.bat %*
+    goto :eof
+
+:chkStep
+	call .\Utils\chk_step.bat %*
+	echo %errorlevel%
+	if errorlevel 2 goto end
+	goto :eof
 
 @REM call .\Utils\get_date.bat -1 "yyyy.MM.dd" y
 

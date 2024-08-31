@@ -55,7 +55,7 @@ if "!SILENT!"=="" set "SILENT=n"
 if /i "!SILENT!" neq "y" (
     echo Will pull branch %BGR%!BR_BASE!%R% in %BGR%!REPO!%R% and create branch %BGR%!BR_PROC!%R%...
     echo.
-	choice /c yn /n /m "Press y/n: "
+	choice /c yn /n /m %BYL%"%MSG_STEP%"%R%
     if errorlevel 2 goto end
 )
 

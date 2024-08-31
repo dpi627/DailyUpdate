@@ -29,7 +29,7 @@ if /i "!SILENT!" neq "y" (
 	echo     to "%BCY%!TAG!%R%"
 	echo folder "%BCY%!FLD!%R%"
 	echo.
-	choice /c yn /n /m "Press y/n: "
+	choice /c yn /n /m %BYL%"%MSG_STEP%"%R%
     if errorlevel 2 goto end
 )
 

@@ -15,10 +15,10 @@
 # 🗃️專案架構
 
 ```c
-📁 Batches  //各步驟獨立批次檔
-📁 Configs  //各種設定檔 (ini)
-📁 Utils    //通用函式庫
-📁 Logs     //歷程記錄 (執行後生成，不納入版控)
+📁 Batches      //各步驟獨立批次檔
+📁 Configs      //各種設定檔 (ini)
+📁 Utils        //通用函式庫
+📁 Logs         //歷程記錄 (執行後生成，不納入版控)
 📄 backup_server.bat    //備份測試機
 📄 daily_update.bat     //每日更新
 📄 weekly_update.bat    //每週更新
@@ -30,7 +30,7 @@
 - `📄daily_update.bat` 每日更新主程序，拉取測試分支 `uat` 後更新測試機
 - `📄weekly_update.bat` 每周更新主程序，拉取預設分支 `main` 後發布更新檔
 
->🚨注意 `📁Configs` 之中的 `📄personal` 必須修改為個人電腦設定
+>🚨注意 `📁Configs` 之中的 `📄personal.ini` 必須修改為個人電腦設定
 
 # 作業流程
 
