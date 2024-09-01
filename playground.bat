@@ -4,9 +4,8 @@ chcp 65001 > nul
 @REM 載入設定
 call .\global_usings.bat
 
-@REM call :GetDate 1 %WEEKLY_DIR_FORMAT%
-@REM set "TAG=%WEEKLY_PATH%\%WEEKLY_DIR_CODE%\%YMD%"
-@REM echo %YMD%
+call :GetDate 1 %WEEKLY_DIR_FORMAT%
+echo %YMD%
 @REM call .\Batches\5_update_uat.bat %PUB% "%TAG%" "%COPY_DIRS%" %LOG_FILE% %SILENT%
 
 @REM call :ChkProc %VS_EXE% "%MSG_VS_RUNNING%"
@@ -24,28 +23,15 @@ call .\global_usings.bat
 @REM echo %errorlevel%
 @REM exit
 
-set "silentMode=n"
-call :selectMode
-echo %silentMode%
+@REM set "IS_SILIENT=n"
+call ::checkMode
+echo %IS_SILIENT%
 exit
 
-:selectMode
-    echo %MSG_MODE_SILENT_DESC%
-    echo %MSG_MODE_ASK_DESC%
-:askUser
-    set "userInput="
-    echo.
-    set /p "userInput=%BYL%%MSG_MODE_CFN%%R%"
-    @REM 直接按下 Enter = 預設值 n
-    if "%userInput%"=="" set "userInput=%silentMode%"
-    @REM 輸入 y 或 Y 啟動安靜模式
-    if /i "%userInput%"=="y" set "silentMode=y"
-    @REM 判斷是否為有效輸入
-    if /i not "%userInput%"=="y" if /i not "%userInput%"=="n" (
-        echo.
-        echo %BRD%Error:%R% %MSG_MODE_CHECK%
-        goto askUser
-    )
+:checkMode
+rem 調用 chk_mode.bat 來執行 askUser 部分
+    call .\Utils\chk_mode.bat
+    echo Silent mode is %IS_SILIENT%
     goto :eof
 
 

@@ -57,7 +57,6 @@ curl -s -o nul -X POST "%SEQ_URL%api/events/raw" ^
      -H "Content-Type: application/json" ^
      -H "X-Seq-ApiKey: %API_KEY%" ^
      -d "%JSON%"
-echo.
 
 if %errorlevel% neq 0 (
     echo %BRD%Error:%R% Failed to send log to Seq
