@@ -11,14 +11,42 @@ call .\global_usings.bat
 
 @REM call :ChkProc %VS_EXE% "%MSG_VS_RUNNING%"
 
-call :chkStep "%MSG_STEP%" %SILENT%
+@REM call :chkStep "%MSG_STEP%" %SILENT%
 
-echo "After call chkStep"
+@REM echo "After call chkStep"
 
-:end
-echo "After end"
-goto :eof
+@REM :end
+@REM echo "After end"
+@REM goto :eof
+@REM exit
+
+@REM choice /c sm /m "請選擇:"
+@REM echo %errorlevel%
+@REM exit
+
+set "silentMode=n"
+call :selectMode
+echo %silentMode%
 exit
+
+:selectMode
+    echo %MSG_MODE_SILENT_DESC%
+    echo %MSG_MODE_ASK_DESC%
+:askUser
+    set "userInput="
+    echo.
+    set /p "userInput=%BYL%%MSG_MODE_CFN%%R%"
+    @REM 直接按下 Enter = 預設值 n
+    if "%userInput%"=="" set "userInput=%silentMode%"
+    @REM 輸入 y 或 Y 啟動安靜模式
+    if /i "%userInput%"=="y" set "silentMode=y"
+    @REM 判斷是否為有效輸入
+    if /i not "%userInput%"=="y" if /i not "%userInput%"=="n" (
+        echo.
+        echo %BRD%Error:%R% %MSG_MODE_CHECK%
+        goto askUser
+    )
+    goto :eof
 
 
 :getDate

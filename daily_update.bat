@@ -42,6 +42,11 @@ echo %BCY%5.%R% Log file path: %BGR%%LOG_FILE%%R%
 echo %BBK%========================================================%R%
 echo.
 
+@REM 執行前確認
+choice /c yn /n /m %BYL%"是否以安靜模式執行 y/n:"%R%
+echo.
+if errorlevel 2 exit /b 2
+
 @REM 暫停確認繼續執行或中斷
 call :chkStep
 
@@ -51,14 +56,14 @@ if "%JUMP_TO_STEP%" neq "" ( goto %JUMP_TO_STEP% )
 :1
 @REM 刪除最後一次部署檔案
 call :logger "Remove Last Publish Data"
-call .\Batches\1_remove_last_pub_data.bat %PUB% %SILENT%
+call :removeLastPublishData %PUB% %SILENT%
 if errorlevel 2 goto end
 
 @REM 檢查 Visual Studio 是否正在執行
-call .\Utils\chk_proc.bat %VS_EXE% "%MSG_VS_RUNNING%"
+call :chkProc %VS_EXE% "%MSG_VS_RUNNING%"
 @REM 暫停確認繼續執行或中斷
 call :chkStep
-
+exit
 :2
 @REM 更新儲存庫指定分支並建立更新分支
 call :logger "Update Repository and Create Branch [%BRANCH_PROC%]"
