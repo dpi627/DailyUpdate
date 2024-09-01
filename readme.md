@@ -4,7 +4,7 @@
 ![](https://img.shields.io/badge/Claude-191919?logo=anthropic) 
 ![](https://img.shields.io/badge/GitHub_Copilot-555?logo=githubcopilot)
 
-# SGS.OAD.DailyUpdate
+# 🕒SGS.OAD.DailyUpdate
 
 - 將 LIMS 日常更新作業標準化，開發批次檔節省時間
 - 指令盡可能符合 Windows 原生執行環境，減少執行異常
@@ -32,11 +32,44 @@
 
 >🚨注意 `📁Configs` 之中的 `📄personal.ini` 必須修改為個人電腦設定
 
-# 作業流程
+# 🔄作業流程
 
-- 備份測試機
-- 執行主要流程
-- 更新測試機
-- 測試連線與登入
+![](./asset/update-flow.drawio.svg)
 
-# 📄主程式 `daily_update.bat` 說明
+# 🛠️ 如何使用
+
+## 📝修改個人設定檔
+
+- 開啟 `.\Configs\personal.ini`，修改為個人路徑
+
+```ini
+; 儲存庫路徑 (即 BLIMS 路徑)
+REPO=C:\dev\BLIMS
+; 發布路徑，專案進行發布後的檔案存放位置
+PUB=C:\dev\somwhere\publish
+```
+
+## ▶️執行主程式
+
+- 每日更新測試機，請執行 `daily_update.bat`
+- 每週更新正式機，請執行 `weekly_update.bat`
+
+>💡參數通常不用輸入，需要可參考檔頭說明，可能範例如下
+
+```bash
+# 更新版本 20240808B，並從步驟 2 開始執行
+daily_update.bat "20240808B" 2
+```
+
+## ⚙️選擇執行模式
+
+- 程式進行初始化後需選擇執行模式，可能會看到以下訊息
+
+```bash
+是否以 [安靜模式] 執行 y/n (預設 [詢問模式] 直接 Enter):
+```
+
+- 請參考畫面說明輸入 `y` 或 `n` 再按 `Enter`
+- 或者直接 `Enter` 使用預設值
+
+>💡[詢問模式] 可檢視步驟執行結果，判斷是否繼續執行或中斷作業，適合不熟悉流程的狀況下使用
