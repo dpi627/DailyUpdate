@@ -110,15 +110,14 @@ if errorlevel 2 (
 @REM 主程序結束
 exit
 
-@REM 函式使用標籤縮短路徑，必須放在主程序最後
-@REM ========================================================
+@REM 函式使用標籤縮短路徑, 必須放在主程序最後
 
 @REM 選擇執行模式
 :selectMode
     call .\Utils\chk_mode.bat
     goto :eof
 
-@REM 暫停確認繼續執行或中斷
+@REM 暫停確認是否繼續執行或中斷
 :chkStep
 	call .\Utils\chk_step.bat "%MSG_STEP%" %SILENT%
 	if errorlevel 2 goto end
