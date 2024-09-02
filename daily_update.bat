@@ -89,14 +89,12 @@ call :chkStep
 @REM 開啟瀏覽器測試 1
 call :logger "Open [%UAT01_URL%] for test..."
 call :openUrl %UAT01_URL%
-call :chkStep
 
 :8
 @REM 開啟瀏覽器測試 2
 call :logger "Open [%UAT02_URL%] for test..."
 call :openUrl %UAT02_URL%
 
-@REM 主程序結尾
 :end
 if errorlevel 2 (
 	call :logger "User Interupted" "Warning"
@@ -117,7 +115,6 @@ exit
     call .\Utils\chk_mode.bat
     goto :eof
 
-@REM 暫停確認是否繼續執行或中斷
 :chkStep
 	call .\Utils\chk_step.bat "%MSG_STEP%" %SILENT%
 	if errorlevel 2 goto end

@@ -34,6 +34,6 @@ echo.
 echo %BGR%Build and Publish successfully%R%
 
 :end
+echo.
 set "EXIT_CODE=!errorlevel!"
 endlocal & exit /b %EXIT_CODE%
-echo.

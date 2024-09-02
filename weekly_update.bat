@@ -26,7 +26,6 @@ call :getDate 0
 set "LOG_FILE=%LOG_DIR%\%LOG_PREFIX%_%YMD%.%LOG_SUFFIX%"
 
 @REM 最後確認
-echo.
 echo :::: %BMG%Final Confirm:%R%
 echo %BBK%========================================================%R%
 echo %BCY%1.%R% Make sure %BRD%SAVE%R% all editing files
@@ -48,7 +47,7 @@ if "%JUMP_TO_STEP%" neq "" ( goto %JUMP_TO_STEP% )
 @REM 刪除最後一次部署檔案
 call :logger "Remove Last Publish Data"
 call :removeLastPublishData %PUB% %SILENT%
-if %errorlevel% equ 2 goto end
+if errorlevel 2 goto end
 
 @REM 檢查 Visual Studio 是否正在執行
 call :chkProc %VS_EXE% "%MSG_VS_RUNNING%"
@@ -58,14 +57,14 @@ call :chkStep
 @REM 更新儲存庫指定分支並建立更新分支
 call :logger "Update Repository and Create Branch [%BRANCH_PROC%]"
 call :syncRepoAndSwitchBranch %REPO% %BRANCH_DEF% %BRANCH_PROC% %SILENT%
-if %errorlevel% equ 2 goto end
+if errorlevel 2 goto end
 call :chkStep
 
 :3
 @REM 編譯並部署
 call :logger "Build and Publish [%SLN_NM%]"
 call :buildAndPublish "%REPO%%CODE_DIR%\%SLN_NM%" "%VS_DEV_CMD%"
-if %errorlevel% equ 2 goto end
+if errorlevel 2 goto end
 call :chkStep
 
 :4
@@ -88,7 +87,7 @@ if %errorlevel% equ 2 (
 	echo %BRD%User Interupted%R%
 ) else (
     call :logger "Process Completed"
-	call :copyToClip "%BRANCH_NM% %MSG_FINISH_DAILY%"
+	call :copyToClip "%BRANCH_NM% %MSG_FINISH_WEEKLY%"
 	echo %BGR%Process Completed%R%
 )
 
@@ -102,7 +101,6 @@ exit
     call .\Utils\chk_mode.bat
     goto :eof
 
-@REM 暫停確認是否繼續執行或中斷
 :chkStep
 	call .\Utils\chk_step.bat "%MSG_STEP%" %SILENT%
 	if errorlevel 2 goto end
