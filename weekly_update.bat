@@ -36,7 +36,6 @@ echo %BCY%5.%R% Log file path: %BGR%%LOG_FILE%%R%
 echo %BBK%========================================================%R%
 echo.
 
-@REM 執行模式選擇
 call :selectMode
 set "SILENT=%IS_SILIENT%"
 

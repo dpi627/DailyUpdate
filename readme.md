@@ -4,6 +4,16 @@
 ![](https://img.shields.io/badge/Claude-191919?logo=anthropic) 
 ![](https://img.shields.io/badge/GitHub_Copilot-555?logo=githubcopilot)
 
+- [🕒SGS.OAD.DailyUpdate](#sgsoaddailyupdate)
+- [🗃️專案架構](#️專案架構)
+- [🔄作業流程](#作業流程)
+- [🛠️ 如何使用](#️-如何使用)
+  - [📝修改個人設定檔](#修改個人設定檔)
+  - [▶️執行主程式](#️執行主程式)
+  - [⚙️選擇執行模式](#️選擇執行模式)
+- [🎉執行完成](#執行完成)
+- [🎥展示影片](#展示影片)
+
 # 🕒SGS.OAD.DailyUpdate
 
 - 將 LIMS 日常更新作業標準化，開發批次檔節省時間
