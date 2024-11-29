@@ -56,5 +56,5 @@ if %CHK%==y (
 	chcp 65001
 	:: 將主機上的專案資料夾備份到遠端指定路徑，省略正常資料夾檔案、log
 	robocopy %SRC% %TAG% /e /xo /r:1 /w:0 /tee /log+:%LOG_FILE% /nfl /xd %EXD%
-	pause
+	::pause
 )
